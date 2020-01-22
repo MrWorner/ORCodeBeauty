@@ -84,7 +84,7 @@ public class ORPrintLnRemover {
                 new PrintLnRemovalWindow(_text, count).setVisible(true);
             } else {
                 //JOptionPane.showMessageDialog(null, "Total lines removed: " + count);
-                JOptionPane.showMessageDialog(null, "The code does not include any $Systems.println() lines.");
+                JOptionPane.showMessageDialog(null, "Current code does not include any '$Systems.println()' command.");
             }
         }
     }

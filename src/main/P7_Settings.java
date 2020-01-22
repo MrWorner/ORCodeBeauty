@@ -127,6 +127,7 @@ public class P7_Settings extends javax.swing.JPanel {
         jComboBox3 = new javax.swing.JComboBox();
         jBchangeB1 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel11 = new javax.swing.JPanel();
         jBself = new javax.swing.JButton();
         jFoldertxt = new javax.swing.JTextField();
@@ -135,7 +136,10 @@ public class P7_Settings extends javax.swing.JPanel {
         jBchangeB = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
         jMainLabelRes = new javax.swing.JLabel();
+
+        setPreferredSize(new java.awt.Dimension(900, 673));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Language"));
 
@@ -211,17 +215,31 @@ public class P7_Settings extends javax.swing.JPanel {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Text"));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Code formatter"));
+
+        jCheckBox1.setSelected(true);
+        jCheckBox1.setText("Remove empty lines after first one");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBox1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBox1)
+                .addContainerGap(285, Short.MAX_VALUE))
         );
 
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Reports"));
@@ -305,6 +323,19 @@ public class P7_Settings extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Text"));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 225, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jMainPanelLayout = new javax.swing.GroupLayout(jMainPanel);
         jMainPanel.setLayout(jMainPanelLayout);
         jMainPanelLayout.setHorizontalGroup(
@@ -320,6 +351,8 @@ public class P7_Settings extends javax.swing.JPanel {
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jMainPanelLayout.setVerticalGroup(
@@ -330,10 +363,14 @@ public class P7_Settings extends javax.swing.JPanel {
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jMainPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -350,7 +387,7 @@ public class P7_Settings extends javax.swing.JPanel {
                         .addGap(22, 22, 22)
                         .addComponent(jMainLabelRes))
                     .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,7 +396,7 @@ public class P7_Settings extends javax.swing.JPanel {
                 .addComponent(jMainLabelRes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -415,6 +452,10 @@ public class P7_Settings extends javax.swing.JPanel {
         Global.CurrentINI.changeValue("DesignName", Global.DesignName);
     }//GEN-LAST:event_jBchangeBActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBaccept;
@@ -422,6 +463,7 @@ public class P7_Settings extends javax.swing.JPanel {
     private javax.swing.JButton jBchangeB1;
     private javax.swing.JButton jBchangeB2;
     private javax.swing.JButton jBself;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
@@ -437,5 +479,6 @@ public class P7_Settings extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     // End of variables declaration//GEN-END:variables
 }
