@@ -53,7 +53,7 @@ public class ORBeauty {
             _textLine = RemoveTabs(_textLine);
             _textLine = RemoveSpaceBeforeAny(_textLine);
             boolean _removeLine = RemoveExtraEmptyLines(_textLine);
-            if (!_removeLine) {                              
+            if (!_removeLine) {
                 _textLine = AddRightTabs(_textLine);
                 _listOfLines.add(_textLine);
             }
@@ -168,22 +168,31 @@ public class ORBeauty {
         int x_if = _text.indexOf("#if");//получаем позицию команды #if
         int x_while = _text.indexOf("#while");//получаем позицию команды #while        
         int x_foreach = _text.indexOf("#foreach");//получаем позицию команды #foreach
+        int x_end = _text.indexOf("#end");//24.01.2020 NEW получаем позицию команды #end |  кто то помжет писать код в одну строку: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end
 
         boolean x_if_ALIVE = x_if > -1;
         boolean x_while_ALIVE = x_while > -1;
         boolean x_foreach_ALIVE = x_foreach > -1;
+        boolean x_end_ALIVE = x_end > -1;
 
         if (x_if_ALIVE || x_while_ALIVE || x_foreach_ALIVE) //проверяем, есть ли одна из команд, которая открывает блок
         {
-            _text = OpeningBlock(_text);
-
+            boolean isOpening = true;
+            if (x_end_ALIVE) {//Проверяем есть ли блок закрытия, если вдруг будет, то возможно придется игнорировать само открытие
+                if ((x_end > x_if && x_if_ALIVE) || (x_end > x_while && x_while_ALIVE) || (x_end > x_foreach && x_foreach_ALIVE)) {
+                    isOpening = false;//код написан в одну строку с открытием и закрытием, пример: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end. Значит игнорируем строку
+                }
+            }
+            if (isOpening) {
+                _text = OpeningBlock(_text);
+            }
         } else {//если нет команды, которая открывает блок, то проверяем - не имеется ли команда закрытия блока (#end)
 
-            int x_end = _text.indexOf("#end");//получаем позицию команды #end
+            //int x_end = _text.indexOf("#end");//ОТКЛЮЧЕН 24.01.2020 получаем позицию команды #end 
             int x_else = _text.indexOf("#else");//получаем позицию команды #else
             int x_elseif = _text.indexOf("#elseif");//получаем позицию команды #elseif
 
-            boolean x_end_ALIVE = x_end > -1;
+            //boolean x_end_ALIVE = x_end > -1;//ОТКЛЮЧЕН 24.01.2020
             boolean x_else_ALIVE = x_else > -1;
             boolean x_elseif_ALIVE = x_elseif > -1;
 
