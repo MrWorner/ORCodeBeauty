@@ -1,8 +1,6 @@
 package OR3Beauty;
 
-import main.*;
 import javax.swing.text.*;
-import javax.swing.*;
 
 public class ORTabSizeEditorKit extends StyledEditorKit {
 

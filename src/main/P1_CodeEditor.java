@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 
 /**
  *
@@ -24,8 +25,6 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     private ORBeauty or3Beauty;
     private ORPrintLnRemover orPrintLnRemover;
 
-    //private CSgta csgta;
-    
     /**
      * Creates new form P1_CodeEditor
      */
@@ -119,7 +118,6 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         });
 
         jButton5.setText("Add PrLn");
-        jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -195,7 +193,13 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+      StyledDocument doc = jTextPane1.getStyledDocument();
+        try {
+            doc.insertString(jTextPane1.getCaretPosition(), "Start of text\n", null );
+        } catch (BadLocationException ex) {
+            Logger.getLogger(P1_CodeEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
     }//GEN-LAST:event_jButton5ActionPerformed
 
 

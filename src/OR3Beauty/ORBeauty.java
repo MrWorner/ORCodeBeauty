@@ -7,14 +7,10 @@ package OR3Beauty;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
-import jdk.nashorn.internal.objects.NativeArray;
 
 //$Objects $OBJS $OBJ $Interface $USER $SELOBJ $SELOBJS $RETURN $ERRMSG $BASE $ILANG $XML $Xml $Date $Check $Math $Strings $Gener $NAME $SERVER true false java
 //shift + Alt + F
@@ -42,13 +38,13 @@ public class ORBeauty {
         currentEmptyLine = 0;// текущая пустая линия
         isCommentedLine_brakets = false;// является ли текущая строка комментарием в /*   */
         isCommentedLine_classic = false;// является ли текущая строка комментарием //
-
+             
         //--Вытаскиваем весь текст с компонента JTextPane
         Element root = textPane.getDocument().getDefaultRootElement();
         List<String> listOfLines = new ArrayList<>();
 
+        int currentCaretPos = textPane.getCaretPosition();
         int totalLines = root.getElementCount();// Подсчитываем кол-во строк МОЖНО БЫЛО ПРОСТО: listOfLines.size()
-
         //--Проходим по каждой строке через разные методы
         for (int i = 0; i < totalLines; i++) {
             Element line = root.getElement(i);
@@ -66,6 +62,7 @@ public class ORBeauty {
 
         String finalText = ORTextMerger.MergeText(listOfLines);// Слияние всех строк
         textPane.setText(finalText);// Прикрепляем к JTextPane
+        textPane.setCaretPosition(currentCaretPos);
         if (needToAddTab > 0) {// Если вдруг неравное количество необх добавлений Таба, то значит где то нехватает #end, код в тексте сломан
             JOptionPane.showMessageDialog(null, "Ooops. Missing #end tag(s): " + needToAddTab);
         }
