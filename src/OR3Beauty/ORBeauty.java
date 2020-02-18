@@ -20,101 +20,104 @@ import jdk.nashorn.internal.objects.NativeArray;
 //shift + Alt + F
 public class ORBeauty {
 
-    private JTextPane jTextPane;
+    //private JTextPane jTextPane;
+    private int needToAddTab = 0;// сколько нужно добавить символов Tab
+    private int needToAddTab_comment = 0;// сколько нужно добавить символов Tab (для комментариев)
+    private int currentEmptyLine = 0;// текущая пустая линия
 
-    private int needToAddTab = 0;
-    private int needToAddTab_comment = 0;
-    private int currentEmptyLine = 0;
+    private boolean isCommentedLine_brakets = false;// является ли текущая строка комментарием в /*   */
+    private boolean isCommentedLine_classic = false;// является ли текущая строка комментарием //
 
-    private boolean isCommentedLine_brakets = false;
-    private boolean isCommentedLine_classic = false;
-
-    public ORBeauty(JTextPane _textPane) {
-        jTextPane = _textPane;
-        jTextPane.setText("Place your OR3 code here");
+    //----КОНСТРУКТОР
+    public ORBeauty(JTextPane textPane) {
+        //jTextPane = textPane;
+        textPane.setText("Place your OR3 code here");
     }
 
-    public void CleanCode() throws BadLocationException {
+    //----ГЛАВНЫЙ МЕТОД ПО СОЗДАНИЮ КРАСОТЫ КОДА
+    public void CleanCode(JTextPane textPane) throws BadLocationException {
 
-        needToAddTab = 0;
-        needToAddTab_comment = 0;
-        currentEmptyLine = 0;
-        isCommentedLine_brakets = false;
-        isCommentedLine_classic = false;
+        needToAddTab = 0;// сколько нужно добавить символов Tab
+        needToAddTab_comment = 0;// сколько нужно добавить символов Tab (для комментариев)
+        currentEmptyLine = 0;// текущая пустая линия
+        isCommentedLine_brakets = false;// является ли текущая строка комментарием в /*   */
+        isCommentedLine_classic = false;// является ли текущая строка комментарием //
 
-        Element _root = jTextPane.getDocument().getDefaultRootElement();
-        List<String> _listOfLines = new ArrayList<>();
-        int _totalLines = _root.getElementCount();
-        for (int i = 0; i < _totalLines; i++) {
-            Element _line = _root.getElement(i);
-            int _startPos = _line.getStartOffset();
-            int _endPos = _line.getEndOffset() - _line.getStartOffset() - 1;
-            String _textLine = _line.getDocument().getText(_startPos, _endPos);
-            _textLine = RemoveTabs(_textLine);
-            _textLine = RemoveSpaceBeforeAny(_textLine);
-            boolean _removeLine = RemoveExtraEmptyLines(_textLine);
-            if (!_removeLine) {
-                _textLine = AddRightTabs(_textLine);
-                _listOfLines.add(_textLine);
+        //--Вытаскиваем весь текст с компонента JTextPane
+        Element root = textPane.getDocument().getDefaultRootElement();
+        List<String> listOfLines = new ArrayList<>();
+
+        int totalLines = root.getElementCount();// Подсчитываем кол-во строк МОЖНО БЫЛО ПРОСТО: listOfLines.size()
+
+        //--Проходим по каждой строке через разные методы
+        for (int i = 0; i < totalLines; i++) {
+            Element line = root.getElement(i);
+            int startPos = line.getStartOffset();
+            int endPos = line.getEndOffset() - line.getStartOffset() - 1;
+            String textLine = line.getDocument().getText(startPos, endPos);
+            textLine = RemoveTabs(textLine);// Удаляем все символы таба у линии
+            textLine = RemoveSpaceBeforeAny(textLine);// Удаляем все начальные пробелы  у линии
+            boolean removeLine = RemoveExtraEmptyLines(textLine);// Получаем является ли текущая строка пустой
+            if (!removeLine) {// Удалить ли текущую строку так как она пустая подряд?
+                textLine = AddRightTabs(textLine);//  Добавляем необходимые символы Таб
+                listOfLines.add(textLine);// Запоминаем строку
             }
-
         }
 
-        String _finalText = ORTextMerger.MergeText(_listOfLines);
-        jTextPane.setText(_finalText);
-        if (needToAddTab > 0) {
+        String finalText = ORTextMerger.MergeText(listOfLines);// Слияние всех строк
+        textPane.setText(finalText);// Прикрепляем к JTextPane
+        if (needToAddTab > 0) {// Если вдруг неравное количество необх добавлений Таба, то значит где то нехватает #end, код в тексте сломан
             JOptionPane.showMessageDialog(null, "Ooops. Missing #end tag(s): " + needToAddTab);
         }
     }
 
-    private String RemoveTabs(String _text) {
-        _text = _text.replaceAll("\t", "");//УДАЛЯЕМ ВСЕ СИМВОЛЫ TAB
-        return _text;
+    private String RemoveTabs(String text) {
+        text = text.replaceAll("\t", "");//УДАЛЯЕМ ВСЕ СИМВОЛЫ TAB
+        return text;
     }
 
-    private String RemoveSpaceBeforeAny(String _text) {
+    private String RemoveSpaceBeforeAny(String text) {
 
         //_text = _text.replaceAll("\n", "");//УДАЛЯЕМ ВСЕ С НОВОЙ СТРОКИ
         //_text = _text.replaceAll(" ", "");//УДАЛЯЕМ ВСЕ ПРОБЕЛЫ
         String finalText = "";
         boolean removedFirstSpaces = false;
-        for (char ch : _text.toCharArray()) {
+        for (char ch : text.toCharArray()) {
             if (ch != ' ' || removedFirstSpaces) {
                 removedFirstSpaces = true;
                 finalText = finalText + ch;
             }
         }
-        //
 
         return finalText;
     }
 
-    private String AddRightTabs(String _text) {
+    private String AddRightTabs(String text) {
 
-        int i = _text.indexOf("//");//получаем позицию символа //
-        boolean i_ALIVE = i > -1;
+        int i = text.indexOf("//");//получаем позицию символа //
+        boolean i_EXISTS = i > -1;
 
         //BEGIN ВЫРЕЗАЕМ КОММЕНТАРИИ, ЧТОБЫ ИЗБАВИТЬСЯ ОТ ПРОВЕРОК
-        String _cuttedText = "";
-        if (i_ALIVE) {
-            String[] arrOfStr = _text.split("//");
+        String cuttedText = "";
+        if (i_EXISTS) {
+            String[] arrOfStr = text.split("//");
             if (arrOfStr.length != 0) {
 
-                _text = arrOfStr[0];
+                text = arrOfStr[0];
                 arrOfStr[0] = "//";
-                boolean _first = true;
+                boolean first = true;
                 for (String a : arrOfStr) {
                     if (a != "//") {
 
-                        if (_first) {
-                            _cuttedText = _cuttedText + a;
-                            _first = false;
+                        if (first) {
+                            cuttedText = cuttedText + a;
+                            first = false;
                         } else {
-                            _cuttedText = _cuttedText + "//" + a;
+                            cuttedText = cuttedText + "//" + a;
                         }
 
                     } else {
-                        _cuttedText = _cuttedText + a;
+                        cuttedText = cuttedText + a;
                     }
 
                 }
@@ -123,11 +126,11 @@ public class ORBeauty {
         //END ВЫРЕЗАЕМ КОММЕНТАРИИ, ЧТОБЫ ИЗБАВИТЬСЯ ОТ ПРОВЕРОК
 
         //BEGIN ДЛЯ ЗАКОМЕНТИРОВАННОЙ СТРОКИ С ПОМОЩЬЮ '//'
-        if (_text.length() == 0) {
+        if (text.length() == 0) {
 
-            if (_cuttedText.length() > 0) { //если есть только комментарии комментарии
+            if (cuttedText.length() > 0) { //если есть только комментарии комментарии
                 //---------------System.out.println("_cuttedText = " + _cuttedText + " needToAddTab_comment = " + needToAddTab_comment);
-                _text = _cuttedText;
+                text = cuttedText;
                 if (!isCommentedLine_classic) {//если режим НЕ включен, то включаем
                     isCommentedLine_classic = true;
                     isCommentedLine_brakets = true;
@@ -151,108 +154,101 @@ public class ORBeauty {
         }
         //END ДЛЯ ЗАКОМЕНТИРОВАННОЙ СТРОКИ С ПОМОЩЬЮ '//'
 
-        int i_begin = _text.indexOf("/*");//получаем позицию символа {*
-        int i_end = _text.indexOf("*/");//получаем позицию символа {*
-        boolean i_begin_ALIVE = i_begin > -1;
-        boolean i_end_ALIVE = i_end > -1;
+        //-------ВОЗМОЖНО ПОТРЕБУЕТСЯ НЕМНОГО ИЗМЕНИТЬ ЛОГИКУ ЕСЛИ ВДРУГ НА ОДНОЙ ЛИНИИ БУДУТ КОММЕНТЫ напр: /* */ /* */
+        int i_begin = text.indexOf("/*");//получаем позицию символа {*
+        int i_end = text.indexOf("*/");//получаем позицию символа {*
+        boolean i_begin_EXISTS = i_begin > -1;
+        boolean i_end_EXISTS = i_end > -1;
 
-        if (i_begin_ALIVE) {
+        if (i_begin_EXISTS) {
             isCommentedLine_brakets = true;
         } else {
-            if (i_end_ALIVE) {
+            if (i_end_EXISTS) {
                 isCommentedLine_brakets = false;
                 needToAddTab_comment = needToAddTab;
             }
         }
 
-        int x_if = _text.indexOf("#if");//получаем позицию команды #if
-        int x_while = _text.indexOf("#while");//получаем позицию команды #while        
-        int x_foreach = _text.indexOf("#foreach");//получаем позицию команды #foreach
-        int x_end = _text.indexOf("#end");//24.01.2020 NEW получаем позицию команды #end |  кто то помжет писать код в одну строку: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end
+        int x_if = text.indexOf("#if");//получаем позицию команды #if
+        int x_while = text.indexOf("#while");//получаем позицию команды #while        
+        int x_foreach = text.indexOf("#foreach");//получаем позицию команды #foreach
+        int x_end = text.indexOf("#end");//24.01.2020 NEW получаем позицию команды #end |  кто то помжет писать код в одну строку: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end
 
-        boolean x_if_ALIVE = x_if > -1;
-        boolean x_while_ALIVE = x_while > -1;
-        boolean x_foreach_ALIVE = x_foreach > -1;
-        boolean x_end_ALIVE = x_end > -1;
+        boolean x_if_EXISTS = x_if > -1;
+        boolean x_while_EXISTS = x_while > -1;
+        boolean x_foreach_EXISTS = x_foreach > -1;
+        boolean x_end_EXISTS = x_end > -1;
 
-        if (x_if_ALIVE || x_while_ALIVE || x_foreach_ALIVE) //проверяем, есть ли одна из команд, которая открывает блок
+        if (x_if_EXISTS || x_while_EXISTS || x_foreach_EXISTS) //проверяем, есть ли одна из команд, которая открывает блок
         {
             boolean isOpening = true;
-            if (x_end_ALIVE) {//Проверяем есть ли блок закрытия, если вдруг будет, то возможно придется игнорировать само открытие
-                if ((x_end > x_if && x_if_ALIVE) || (x_end > x_while && x_while_ALIVE) || (x_end > x_foreach && x_foreach_ALIVE)) {
+            if (x_end_EXISTS) {//Проверяем есть ли блок закрытия, если вдруг будет, то возможно придется игнорировать само открытие
+                if ((x_end > x_if && x_if_EXISTS) || (x_end > x_while && x_while_EXISTS) || (x_end > x_foreach && x_foreach_EXISTS)) {
                     isOpening = false;//код написан в одну строку с открытием и закрытием, пример: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end. Значит игнорируем строку
                 }
             }
             if (isOpening) {
-                _text = OpeningBlock(_text);
+                text = OpeningBlock(text);
             }
         } else {//если нет команды, которая открывает блок, то проверяем - не имеется ли команда закрытия блока (#end)
 
             //int x_end = _text.indexOf("#end");//ОТКЛЮЧЕН 24.01.2020 получаем позицию команды #end 
-            int x_else = _text.indexOf("#else");//получаем позицию команды #else
-            int x_elseif = _text.indexOf("#elseif");//получаем позицию команды #elseif
+            int x_else = text.indexOf("#else");//получаем позицию команды #else
+            int x_elseif = text.indexOf("#elseif");//получаем позицию команды #elseif
 
             //boolean x_end_ALIVE = x_end > -1;//ОТКЛЮЧЕН 24.01.2020
-            boolean x_else_ALIVE = x_else > -1;
-            boolean x_elseif_ALIVE = x_elseif > -1;
+            boolean x_else_EXISTS = x_else > -1;
+            boolean x_elseif_EXISTS = x_elseif > -1;
 
-            if (x_end_ALIVE || x_else_ALIVE || x_elseif_ALIVE) {//если есть команда закрытие блока
-
-                _text = ClosingBlock(_text, x_end_ALIVE);
-
+            if (x_end_EXISTS || x_else_EXISTS || x_elseif_EXISTS) {//если есть команда закрытие блока
+                text = ClosingBlock(text, x_end_EXISTS);
             } else {//если нет команд открытия или закрытия блока, то просто для обычного текста
-
-                _text = SimpleText(_text);
-
+                text = SimpleText(text);
             }
-
         }
 
         //BEGIN ЕСЛИ БЫЛИ КОММЕНТАРИИ (//), ТО ВОЗВРАЩАЕМ В ТЕКСТ
-        if (i_ALIVE) {
-
+        if (i_EXISTS) {
             if (!isCommentedLine_classic) {
-                _text = _text + _cuttedText;
+                text = text + cuttedText;
             }
-
         }
         //END ЕСЛИ БЫЛИ КОММЕНТАРИИ (//), ТО ВОЗВРАЩАЕМ В ТЕКСТ
 
         //System.err.println("STARTED| i = " + i + " x_foreach = " + x_foreach);
-        return _text;
+        return text;
     }
 
-    private String OpeningBlock(String _text) {
+    private String OpeningBlock(String text) {
 
         for (int j = 0; j < needToAddTab; j++) {
-            _text = "\t" + _text;
+            text = "\t" + text;
         }
 
         if (isCommentedLine_brakets) {
             for (int j = 0; j < needToAddTab_comment; j++) {
-                _text = "\t" + _text;
+                text = "\t" + text;
             }
-
         }
-        System.out.println("BEFORE OpeningBlock _text = " + _text + " needToAddTab_comment = " + needToAddTab_comment);
+        
+        System.out.println("BEFORE OpeningBlock _text = " + text + " needToAddTab_comment = " + needToAddTab_comment);
         if (isCommentedLine_brakets) {
             needToAddTab_comment++;
-            System.out.println("OpeningBlock _text = " + _text + " needToAddTab_comment = " + needToAddTab_comment);
+            System.out.println("OpeningBlock _text = " + text + " needToAddTab_comment = " + needToAddTab_comment);
         } else {
             needToAddTab++;
         }
 
-        return _text;
+        return text;
     }
 
-    private String ClosingBlock(String _text, boolean isEndTag) {
+    private String ClosingBlock(String text, boolean isEndTag) {
         if (!isCommentedLine_brakets) {
             needToAddTab--;
         }
 
         for (int j = 0; j < needToAddTab; j++) {
-            _text = "\t" + _text;
-
+            text = "\t" + text;
         }
 
         if (isCommentedLine_brakets) {
@@ -262,8 +258,7 @@ public class ORBeauty {
             }
 
             for (int j = 0; j < needToAddTab_comment; j++) {
-                _text = "\t" + _text;
-
+                text = "\t" + text;
             }
         }
 
@@ -275,36 +270,36 @@ public class ORBeauty {
             }
         }
 
-        return _text;
+        return text;
     }
 
-    private String SimpleText(String _text) {
+    private String SimpleText(String text) {
 
         for (int j = 0; j < needToAddTab; j++) {
-            _text = "\t" + _text;
+            text = "\t" + text;
         }
         if (isCommentedLine_brakets) {
             for (int j = 0; j < needToAddTab_comment; j++) {
-                _text = "\t" + _text;
+                text = "\t" + text;
             }
         }
 
-        return _text;
+        return text;
     }
 
-    private boolean RemoveExtraEmptyLines(String _text) {
-        boolean _remove = false;
+    private boolean RemoveExtraEmptyLines(String text) {
+        boolean remove = false;
 
-        if (_text.length() == 0 || _text == " ") {
+        if (text.length() == 0 || text == " ") {
             currentEmptyLine++;
             if (currentEmptyLine > 1) {
-                _remove = true;
+                remove = true;
                 currentEmptyLine--;
             }
         } else {
             currentEmptyLine = 0;
         }
 
-        return _remove;
+        return remove;
     }
 }

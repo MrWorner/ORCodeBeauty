@@ -63,7 +63,7 @@ public class ORHighligter {
         return index;
     }
 
-    public ORHighligter(JTextPane _textPane) {
+    public ORHighligter(JTextPane textPane) {
 
         final StyleContext cont = StyleContext.getDefaultStyleContext();
         final AttributeSet attrBlue = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, Color.BLUE);
@@ -132,7 +132,7 @@ public class ORHighligter {
         //jTextPane.setEditorKit(new javax.swing.text.StyledEditorKit());
         //LineNumbers lineNums = new LineNumbers( jTextPane );
         //JTextPane txt = new JTextPane(doc);
-        _textPane.setStyledDocument(doc);
+        textPane.setStyledDocument(doc);
         //_textPane.setText("public class Hi {}");
         //add(new JScrollPane(txt));
         //setVisible(true);

@@ -19,11 +19,11 @@ public class PrintLnRemovalWindow extends javax.swing.JFrame {
     /**
      * Creates new form PrintLnRemovalWindow
      */
-    public PrintLnRemovalWindow(String _text, int _count) {
+    public PrintLnRemovalWindow(String text, int count) {
         initComponents();
         this.setLocationRelativeTo(null);
-        jTextArea1.setText(_text);
-        jLabel1.setText("Total lines removed: " + _count);
+        jTextArea1.setText(text);
+        jLabel1.setText("Total lines removed: " + count);
     }
 
     /**

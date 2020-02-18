@@ -20,7 +20,7 @@ public class ORLineNumber extends JFrame {
         lines.setBackground(Color.LIGHT_GRAY);
         lines.setEditable(false);
         Font font = textPane.getFont();
-        float size = font.getSize();
+        //float size = font.getSize();
         lines.setFont(font);
 
         //  Code to implement line numbers inside the JTextArea

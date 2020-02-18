@@ -43,14 +43,11 @@ public class Main extends javax.swing.JFrame {
         //http://www.javaportal.ru/java/articles/JTextPane.html
         initComponents();
         this.setLocationRelativeTo(null);
-
-       
-      
+         
         or3Highligter = new ORHighligter(jTextPane1);
         orLineNumber = new ORLineNumber(jTextPane1, jScrollPane2);
         or3Beauty = new ORBeauty(jTextPane1);
         orPrintLnRemover = new ORPrintLnRemover(jTextPane1);
-
 
         //--BEGIN СКИН!
         try {
@@ -175,7 +172,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            or3Beauty.CleanCode();
+            or3Beauty.CleanCode(jTextPane1);
         } catch (BadLocationException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

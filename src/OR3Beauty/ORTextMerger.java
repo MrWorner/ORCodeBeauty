@@ -12,22 +12,20 @@ import java.util.List;
  * @author User
  */
 public class ORTextMerger {
-    public static String MergeText(List<String> _listOfLines) {
-        String _finalText = "";
+    public static String MergeText(List<String> listOfLines) {
+        String finalText = "";
         //boolean first = true;
         //System.err.println("STARTED!|" + _listOfLines.size() + " " + _listOfLines);
-
-        int i = 0;
         boolean first = true;
-        for (String _text : _listOfLines) {
+        for (String text : listOfLines) {
             if (first) {
-                _finalText = _text;
+                finalText = text;
                 first = false;
             } else {
-                _finalText = _finalText + "\n" + _text;//С НОВОЙ СТРОКИ
+                finalText = finalText + "\n" + text;//С НОВОЙ СТРОКИ
             }
         }
         //label.setText(finalText);
-        return _finalText;
+        return finalText;
     }
 }
