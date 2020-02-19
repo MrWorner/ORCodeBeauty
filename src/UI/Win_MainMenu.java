@@ -1,7 +1,7 @@
 package UI;
 
 import UI.P1_CodeEditor;
-import UI.P7_Settings;
+import UI.P2_Settings;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -34,7 +34,7 @@ public class Win_MainMenu extends javax.swing.JFrame {
 //        Global.PerimetrManagerPanel = new P4_PerimetrManager();
 //        Global.ParentManagerPanel = new P5_AssignParents();
 //        Global.IDcardManagerPanel = new P6_IDcardManager();
-        Global.SettingsPanel = new P7_Settings(this);
+        Global.SettingsPanel = new P2_Settings(this);
 
         //System.out.println("Global.Design = " + Global.Design);
         //this.setType(javax.swing.JFrame.Type.UTILITY);
@@ -283,8 +283,8 @@ public class Win_MainMenu extends javax.swing.JFrame {
         jPanel1.repaint();
         jPanel1.revalidate();
 
-        //jPanel1.add(SettingsPanel = new P7_Settings(backlabel, this));
-        Global.SettingsPanel = new P7_Settings(this);
+        //jPanel1.add(SettingsPanel = new P2_Settings(backlabel, this));
+        Global.SettingsPanel = new P2_Settings(this);
         jPanel1.add(Global.SettingsPanel);
         jPanel1.repaint();
         jPanel1.revalidate();

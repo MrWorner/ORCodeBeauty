@@ -15,22 +15,22 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import main.Global;
 
-public class P7_Settings extends javax.swing.JPanel {
+public class P2_Settings extends javax.swing.JPanel {
 
     //JLabel backlabel3;
     Win_MainMenu Jmain2;
-    private static P7_Settings single_instance = null;
+    private static P2_Settings single_instance = null;
 
     
-      public static P7_Settings getInstance(Win_MainMenu Jmain) 
+      public static P2_Settings getInstance(Win_MainMenu Jmain) 
     { 
         if (single_instance == null) 
-            single_instance = new P7_Settings(Jmain);  
+            single_instance = new P2_Settings(Jmain);  
         return single_instance; 
     } 
     
     
-    public P7_Settings(Win_MainMenu Jmain) {
+    public P2_Settings(Win_MainMenu Jmain) {
         initComponents();
 
         //Global.desing = "src/Images/Backgrounds/7.jpg";

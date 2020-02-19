@@ -9,12 +9,12 @@ package UI;
  *
  * @author user
  */
-public class P2_Statistics extends javax.swing.JPanel {
+public class P99_Statistics extends javax.swing.JPanel {
 
     /**
      * Creates new form P1_Statistics
      */
-    public P2_Statistics() {
+    public P99_Statistics() {
         initComponents();
     }
 

@@ -5,8 +5,8 @@
  */
 package main;
 
-import UI.P2_Statistics;
-import UI.P7_Settings;
+import UI.P99_Statistics;
+import UI.P2_Settings;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
@@ -29,23 +29,23 @@ public class Global {
     public static JLabel backlabelNEW;
     public static INIfile CurrentINI = new INIfile();
 
-    public static P2_Statistics StatisticsPanel;
+    public static P99_Statistics StatisticsPanel;
 //    public static P2_UserManager UserManagerPanel;
 //    public static P3_TriggerManager TriggerManagerPanel;
 //    public static P4_PerimetrManager PerimetrManagerPanel;
 //    public static P5_AssignParents ParentManagerPanel;
 //    public static P6_IDcardManager IDcardManagerPanel;
-    public static P7_Settings SettingsPanel;
+    public static P2_Settings SettingsPanel;
 
     public static ArrayList<String> ClientMessages = new ArrayList<String>();
 
-    //public static P2_Statistics StatisticsPanel;
+    //public static P99_Statistics StatisticsPanel;
     // public static P2_UserManager UserManagerPanel;
     //public static P3_TriggerManager TriggerManagerPanel;
     //public static P4_PerimetrManager PerimetrManagerPanel;
     // public static P5_ParentManager ParentManagerPanel;
     // public static P6_IDcardManager IDcardManagerPanel;
-    //  public static P7_Settings SettingsPanel;
+    //  public static P2_Settings SettingsPanel;
     public static DBConnect DBNewConnection;
 
 }

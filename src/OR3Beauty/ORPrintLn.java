@@ -113,7 +113,7 @@ public class ORPrintLn {
         instance.jTextPane.setText(_finalText);
     }
 
-    public static void AddPrintLn(JTextPane _textPane) {
+    public static void AddPrintLn(JTextPane _textPane, String text) {
 
         try {
 
@@ -141,7 +141,7 @@ public class ORPrintLn {
                 doc.insertString(cursorPos, "Start of text", null);
             }
              */
-            doc.insertString(cursorPos, "Start of text", null);
+            doc.insertString(cursorPos, "$Systems.println(\"" + text + "\")", null);
 
             //-------String line = doc.getText(_textPane.getCaretPosition(), 0);
         } catch (BadLocationException ex) {

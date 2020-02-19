@@ -17,15 +17,15 @@ import javax.swing.text.BadLocationException;
  */
 public class P1_CodeEditor extends javax.swing.JPanel {
 
-    private static P1_CodeEditor instance = null; 
-    
+    private static P1_CodeEditor instance = null;
+
     private ORHighligter or3Highligter;
     private ORLineNumber orLineNumber;
     private ORBeauty or3Beauty;
     private ORPrintLn orPrintLnRemover;
 
     public P1_CodeEditor() {
-        initComponents();        
+        initComponents();
         //jTextPane1.
         jTextPane1.setEditorKit(new ORTabSizeEditorKit());
         or3Highligter = new ORHighligter(jTextPane1);
@@ -36,13 +36,13 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         jTextPane1.setText("Place your OR3 code here");
     }
 
-    public static P1_CodeEditor getInstance() 
-    { 
-        if (instance == null) 
-            instance = new P1_CodeEditor();  
-        return instance; 
-    } 
-        
+    public static P1_CodeEditor getInstance() {
+        if (instance == null) {
+            instance = new P1_CodeEditor();
+        }
+        return instance;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -177,7 +177,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextPane1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyReleased
@@ -185,12 +185,13 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextPane1KeyReleased
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       jTextPane1.setText("");
-       orLineNumber.CountLines();
+        jTextPane1.setText("");
+        orLineNumber.CountLines();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-          ORPrintLn.AddPrintLn(jTextPane1);
+        //Win_AddPrintLn win_PrintLnRemovalnew =
+        new Win_AddPrintLn(jTextPane1).setVisible(true);      
     }//GEN-LAST:event_jButton5ActionPerformed
 
 
