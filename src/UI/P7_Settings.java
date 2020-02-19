@@ -1,4 +1,4 @@
-package main;
+package UI;
 
 import java.awt.Color;
 import java.security.MessageDigest;
@@ -13,15 +13,16 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import main.Global;
 
 public class P7_Settings extends javax.swing.JPanel {
 
     //JLabel backlabel3;
-    MainMenu Jmain2;
+    Win_MainMenu Jmain2;
     private static P7_Settings single_instance = null;
 
     
-      public static P7_Settings getInstance(MainMenu Jmain) 
+      public static P7_Settings getInstance(Win_MainMenu Jmain) 
     { 
         if (single_instance == null) 
             single_instance = new P7_Settings(Jmain);  
@@ -29,7 +30,7 @@ public class P7_Settings extends javax.swing.JPanel {
     } 
     
     
-    public P7_Settings(MainMenu Jmain) {
+    public P7_Settings(Win_MainMenu Jmain) {
         initComponents();
 
         //Global.desing = "src/Images/Backgrounds/7.jpg";

@@ -1,5 +1,7 @@
-package main;
+package UI;
 
+import UI.P1_CodeEditor;
+import UI.P7_Settings;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -9,8 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import OR3Beauty.*;
+import main.Global;
 
-public class MainMenu extends javax.swing.JFrame {
+public class Win_MainMenu extends javax.swing.JFrame {
 
     // StudMarksTest StudMarksTest = new StudMarksTest();
     // NewsP NewsPanel = new NewsP();
@@ -19,7 +22,7 @@ public class MainMenu extends javax.swing.JFrame {
     Color DefPressedCol;
 
     //JLabel backlabel;
-    public MainMenu() {
+    public Win_MainMenu() {
         initComponents();
 
         Global.Design = Global.CurrentINI.readOneProp("Design");
@@ -314,14 +317,15 @@ public class MainMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Win_MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Win_MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Win_MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Win_MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         try {
@@ -344,7 +348,7 @@ public class MainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
+                new Win_MainMenu().setVisible(true);
             }
         });
 

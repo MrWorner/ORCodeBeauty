@@ -5,26 +5,37 @@
  */
 package OR3Beauty;
 
+import UI.Win_PrintLnRemoval;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
+import javax.swing.text.StyledDocument;
+import UI.P1_CodeEditor;
+import javax.swing.text.Utilities;
+//import com.sun.xml.internal.ws.util.StringUtils;
+//import org.apache.commons.lang3.StringUtils;
 
 /**
  *
  * @author User
  */
-public class ORPrintLnRemover {
+public class ORPrintLn {
 
-    public static ORPrintLnRemover singleTon;
+    /**
+     *
+     */
+    public static ORPrintLn instance;
     private JTextPane jTextPane;
     private List<String> listOfRecoveryLines;
 
-    public ORPrintLnRemover(JTextPane _textPane) {
+    public ORPrintLn(JTextPane _textPane) {
         jTextPane = _textPane;
-        singleTon = this;
+        instance = this;
     }
 
     public void CleanCode() throws BadLocationException {
@@ -61,23 +72,21 @@ public class ORPrintLnRemover {
                 String finalText = ORTextMerger.MergeText(listOfLines);
                 jTextPane.setText(finalText);
 
-                //String _text = "Total lines removed: " + count  + "\n";
+                //String _text = "Total lines removed: " + countSpace  + "\n";
                 String text = "";
                 for (int i = 0; i < listOfRemovedLines.size(); i++) {
-                    
+
                     if (text.length() == 0) {
                         text = listOfRemovedLines.get(i);
-                    }
-                    else
-                    {
+                    } else {
                         text = text + "\n" + listOfRemovedLines.get(i);
                     }
-                    
+
                 }
                 text = text.replaceAll("\t", "");//УДАЛЯЕМ ВСЕ СИМВОЛЫ TAB
-                new PrintLnRemovalWindow(text, count).setVisible(true);
+                new Win_PrintLnRemoval(text, count).setVisible(true);
             } else {
-                //JOptionPane.showMessageDialog(null, "Total lines removed: " + count);
+                //JOptionPane.showMessageDialog(null, "Total lines removed: " + countSpace);
                 JOptionPane.showMessageDialog(null, "Current code does not include any '$Systems.println()' command.");
             }
         }
@@ -98,9 +107,47 @@ public class ORPrintLnRemover {
         return removeLine;
     }
 
-    public static void RecoverText() throws BadLocationException {  
-        String _finalText = ORTextMerger.MergeText(singleTon.listOfRecoveryLines);
-        singleTon.listOfRecoveryLines.clear();
-        singleTon.jTextPane.setText(_finalText);
+    public static void RecoverText() throws BadLocationException {
+        String _finalText = ORTextMerger.MergeText(instance.listOfRecoveryLines);
+        instance.listOfRecoveryLines.clear();
+        instance.jTextPane.setText(_finalText);
     }
+
+    public static void AddPrintLn(JTextPane _textPane) {
+
+        try {
+
+            int cursorPos = _textPane.getCaretPosition();
+
+            StyledDocument doc = _textPane.getStyledDocument();
+            Element root = _textPane.getDocument().getDefaultRootElement();
+
+            /*
+            int lineNum = root.getElementIndex(cursorPos  + 1);
+            Element line = root.getElement(lineNum);
+            int startPos = line.getStartOffset();//ПАДАЕТ!!!!
+            int endPos = line.getEndOffset() - line.getStartOffset() - 1;      
+            String textLine = line.getDocument().getText(startPos, endPos);
+            
+            int countSpace = textLine.length() - textLine.replaceAll(" ", "").length();
+            if (textLine.length() > 0 && countSpace != textLine.length()) {
+
+                if (endPos < cursorPos) {
+                    doc.insertString(cursorPos, "\nStart of text", null);
+                } else {
+                    doc.insertString(cursorPos, "\nStart of text\n", null);
+                }
+            } else {
+                doc.insertString(cursorPos, "Start of text", null);
+            }
+             */
+            doc.insertString(cursorPos, "Start of text", null);
+
+            //-------String line = doc.getText(_textPane.getCaretPosition(), 0);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(P1_CodeEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }

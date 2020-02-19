@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package UI;
 
 import OR3Beauty.*;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.StyledDocument;
 
 /**
  *
@@ -18,34 +17,32 @@ import javax.swing.text.StyledDocument;
  */
 public class P1_CodeEditor extends javax.swing.JPanel {
 
-    private static P1_CodeEditor single_instance = null; 
+    private static P1_CodeEditor instance = null; 
     
     private ORHighligter or3Highligter;
     private ORLineNumber orLineNumber;
     private ORBeauty or3Beauty;
-    private ORPrintLnRemover orPrintLnRemover;
+    private ORPrintLn orPrintLnRemover;
 
-    /**
-     * Creates new form P1_CodeEditor
-     */
     public P1_CodeEditor() {
-        initComponents();
+        initComponents();        
         //jTextPane1.
         jTextPane1.setEditorKit(new ORTabSizeEditorKit());
         or3Highligter = new ORHighligter(jTextPane1);
         orLineNumber = new ORLineNumber(jTextPane1, jScrollPane2);
         or3Beauty = new ORBeauty(jTextPane1);
         //csgta = new CSgta(jTextPane1);
-        orPrintLnRemover = new ORPrintLnRemover(jTextPane1);
+        orPrintLnRemover = new ORPrintLn(jTextPane1);
+        jTextPane1.setText("Place your OR3 code here");
     }
 
     public static P1_CodeEditor getInstance() 
     { 
-        if (single_instance == null) 
-            single_instance = new P1_CodeEditor();  
-        return single_instance; 
+        if (instance == null) 
+            instance = new P1_CodeEditor();  
+        return instance; 
     } 
-      
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -175,7 +172,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
             orPrintLnRemover.CleanCode();
             orLineNumber.CountLines();
         } catch (BadLocationException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Win_MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -193,13 +190,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-      StyledDocument doc = jTextPane1.getStyledDocument();
-        try {
-            doc.insertString(jTextPane1.getCaretPosition(), "Start of text\n", null );
-        } catch (BadLocationException ex) {
-            Logger.getLogger(P1_CodeEditor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-  
+          ORPrintLn.AddPrintLn(jTextPane1);
     }//GEN-LAST:event_jButton5ActionPerformed
 
 

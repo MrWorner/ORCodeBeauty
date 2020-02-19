@@ -27,7 +27,8 @@ public class ORBeauty {
     //----КОНСТРУКТОР
     public ORBeauty(JTextPane textPane) {
         //jTextPane = textPane;
-        textPane.setText("Place your OR3 code here");
+        
+        
     }
 
     //----ГЛАВНЫЙ МЕТОД ПО СОЗДАНИЮ КРАСОТЫ КОДА
@@ -41,10 +42,10 @@ public class ORBeauty {
              
         //--Вытаскиваем весь текст с компонента JTextPane
         Element root = textPane.getDocument().getDefaultRootElement();
-        List<String> listOfLines = new ArrayList<>();
+        List<String> FinalListOfLines = new ArrayList<>();
 
         int currentCaretPos = textPane.getCaretPosition();
-        int totalLines = root.getElementCount();// Подсчитываем кол-во строк МОЖНО БЫЛО ПРОСТО: listOfLines.size()
+        int totalLines = root.getElementCount();// Подсчитываем кол-во строк МОЖНО БЫЛО ПРОСТО: FinalListOfLines.size()
         //--Проходим по каждой строке через разные методы
         for (int i = 0; i < totalLines; i++) {
             Element line = root.getElement(i);
@@ -56,11 +57,11 @@ public class ORBeauty {
             boolean removeLine = RemoveExtraEmptyLines(textLine);// Получаем является ли текущая строка пустой
             if (!removeLine) {// Удалить ли текущую строку так как она пустая подряд?
                 textLine = AddRightTabs(textLine);//  Добавляем необходимые символы Таб
-                listOfLines.add(textLine);// Запоминаем строку
+                FinalListOfLines.add(textLine);// Запоминаем строку
             }
         }
 
-        String finalText = ORTextMerger.MergeText(listOfLines);// Слияние всех строк
+        String finalText = ORTextMerger.MergeText(FinalListOfLines);// Слияние всех строк
         textPane.setText(finalText);// Прикрепляем к JTextPane
         textPane.setCaretPosition(currentCaretPos);
         if (needToAddTab > 0) {// Если вдруг неравное количество необх добавлений Таба, то значит где то нехватает #end, код в тексте сломан

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package OR3Beauty;
+package UI;
 
+import OR3Beauty.ORPrintLn;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -14,12 +15,12 @@ import javax.swing.text.BadLocationException;
  *
  * @author User
  */
-public class PrintLnRemovalWindow extends javax.swing.JFrame {
+public class Win_PrintLnRemoval extends javax.swing.JFrame {
 
     /**
      * Creates new form PrintLnRemovalWindow
      */
-    public PrintLnRemovalWindow(String text, int count) {
+    public Win_PrintLnRemoval(String text, int count) {
         initComponents();
         this.setLocationRelativeTo(null);
         jTextArea1.setText(text);
@@ -107,10 +108,10 @@ public class PrintLnRemovalWindow extends javax.swing.JFrame {
             try {
                 setVisible(false);
                 dispose();
-                ORPrintLnRemover.RecoverText();
+                ORPrintLn.RecoverText();
                 JOptionPane.showMessageDialog(null, "Previous code has been restored!");
             } catch (BadLocationException ex) {
-                Logger.getLogger(PrintLnRemovalWindow.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Win_PrintLnRemoval.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             

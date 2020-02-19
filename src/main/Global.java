@@ -5,6 +5,8 @@
  */
 package main;
 
+import UI.P2_Statistics;
+import UI.P7_Settings;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;

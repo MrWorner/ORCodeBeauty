@@ -1,5 +1,6 @@
 package test;
 
+import UI.Win_MainMenu;
 import main.*;
 import java.awt.Color;
 import java.util.regex.Matcher;
@@ -20,10 +21,10 @@ import javax.swing.event.PopupMenuListener;
 public class OLD_P7_Settings1 extends javax.swing.JPanel {
 
     JLabel backlabel3;
-    MainMenu Jmain2;
+    Win_MainMenu Jmain2;
     String Design = "src/Images/Backgrounds/7.jpg";
 
-    public OLD_P7_Settings1(JLabel backlabel2, MainMenu Jmain) {
+    public OLD_P7_Settings1(JLabel backlabel2, Win_MainMenu Jmain) {
         initComponents();
 
         //Global.desing = "src/Images/Backgrounds/7.jpg";
