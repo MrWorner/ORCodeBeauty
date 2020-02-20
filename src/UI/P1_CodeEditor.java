@@ -33,7 +33,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         or3Beauty = new OR_Beauty(jTextPane1);
         //csgta = new CSgta(jTextPane1);
         orPrintLnRemover = new OR_PrintLn(jTextPane1);
-        jTextPane1.setText("Place your OR3 code here");
+        jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \nAAAAAAAAAAAAAAAA \nBBBBBBBB \n$Systems.println(\"test 99\")");
     }
 
     public static P1_CodeEditor getInstance() {
@@ -169,7 +169,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            orPrintLnRemover.CleanCodeNEW();
+            orPrintLnRemover.CleanCode();
             orLineNumber.CountLines();
         } catch (BadLocationException ex) {
             Logger.getLogger(Win_MainMenu.class.getName()).log(Level.SEVERE, null, ex);
