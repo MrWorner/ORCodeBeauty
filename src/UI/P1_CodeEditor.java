@@ -19,20 +19,20 @@ public class P1_CodeEditor extends javax.swing.JPanel {
 
     private static P1_CodeEditor instance = null;
 
-    private ORHighligter or3Highligter;
-    private ORLineNumber orLineNumber;
-    private ORBeauty or3Beauty;
-    private ORPrintLn orPrintLnRemover;
+    private OR_Highligter or3Highligter;
+    private OR_LineNumber orLineNumber;
+    private OR_Beauty or3Beauty;
+    private OR_PrintLn orPrintLnRemover;
 
     public P1_CodeEditor() {
         initComponents();
         //jTextPane1.
-        jTextPane1.setEditorKit(new ORTabSizeEditorKit());
-        or3Highligter = new ORHighligter(jTextPane1);
-        orLineNumber = new ORLineNumber(jTextPane1, jScrollPane2);
-        or3Beauty = new ORBeauty(jTextPane1);
+        jTextPane1.setEditorKit(new OR_TabSizeEditorKit());
+        or3Highligter = new OR_Highligter(jTextPane1);
+        orLineNumber = new OR_LineNumber(jTextPane1, jScrollPane2);
+        or3Beauty = new OR_Beauty(jTextPane1);
         //csgta = new CSgta(jTextPane1);
-        orPrintLnRemover = new ORPrintLn(jTextPane1);
+        orPrintLnRemover = new OR_PrintLn(jTextPane1);
         jTextPane1.setText("Place your OR3 code here");
     }
 
@@ -169,7 +169,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            orPrintLnRemover.CleanCode();
+            orPrintLnRemover.CleanCodeNEW();
             orLineNumber.CountLines();
         } catch (BadLocationException ex) {
             Logger.getLogger(Win_MainMenu.class.getName()).log(Level.SEVERE, null, ex);

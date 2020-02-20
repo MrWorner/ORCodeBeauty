@@ -5,13 +5,13 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.Element;
 
-public class ORLineNumber extends JFrame {
+public class OR_LineNumber extends JFrame {
 
     private static JTextPane textPane;
     private static JTextArea lines;
     //private JScrollPane jsp;
 
-    public ORLineNumber(JTextPane _textPane, JScrollPane jsp) {
+    public OR_LineNumber(JTextPane _textPane, JScrollPane jsp) {
         textPane = _textPane;
 
         //setTitle("LineNumberTextArea Test");

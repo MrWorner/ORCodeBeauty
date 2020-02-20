@@ -5,7 +5,7 @@
  */
 package UI;
 
-import OR3Beauty.ORPrintLn;
+import OR3Beauty.OR_PrintLn;
 import javax.swing.JTextPane;
 
 /**
@@ -119,7 +119,7 @@ public class Win_AddPrintLn extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        ORPrintLn.AddPrintLn(textPane, jTextField1.getText());
+        OR_PrintLn.AddPrintLn(textPane, jTextField1.getText());
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed

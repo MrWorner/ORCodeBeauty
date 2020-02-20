@@ -2,7 +2,7 @@ package OR3Beauty;
 
 import javax.swing.text.*;
 
-public class ORTabSizeEditorKit extends StyledEditorKit {
+public class OR_TabSizeEditorKit extends StyledEditorKit {
 
     public static final int TAB_SIZE = 40;
 

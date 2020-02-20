@@ -3,6 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//http://www.java2s.com/Code/Java/Swing-JFC/CatalogSwing-JFC.htm
+//https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html#TextComponentDemo
+
+
 package OR3Beauty;
 
 import java.util.ArrayList;
@@ -14,7 +19,7 @@ import javax.swing.text.Element;
 
 //$Objects $OBJS $OBJ $Interface $USER $SELOBJ $SELOBJS $RETURN $ERRMSG $BASE $ILANG $XML $Xml $Date $Check $Math $Strings $Gener $NAME $SERVER true false java
 //shift + Alt + F
-public class ORBeauty {
+public class OR_Beauty {
 
     //private JTextPane jTextPane;
     private int needToAddTab = 0;// сколько нужно добавить символов Tab
@@ -25,7 +30,7 @@ public class ORBeauty {
     private boolean isCommentedLine_classic = false;// является ли текущая строка комментарием //
 
     //----КОНСТРУКТОР
-    public ORBeauty(JTextPane textPane) {
+    public OR_Beauty(JTextPane textPane) {
         //jTextPane = textPane;
         
         
@@ -61,7 +66,7 @@ public class ORBeauty {
             }
         }
 
-        String finalText = ORTextMerger.MergeText(FinalListOfLines);// Слияние всех строк
+        String finalText = OR_TextMerger.MergeText(FinalListOfLines);// Слияние всех строк
         textPane.setText(finalText);// Прикрепляем к JTextPane
         textPane.setCaretPosition(currentCaretPos);
         if (needToAddTab > 0) {// Если вдруг неравное количество необх добавлений Таба, то значит где то нехватает #end, код в тексте сломан

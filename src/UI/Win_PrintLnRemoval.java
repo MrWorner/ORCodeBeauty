@@ -5,7 +5,7 @@
  */
 package UI;
 
-import OR3Beauty.ORPrintLn;
+import OR3Beauty.OR_PrintLn;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,11 +20,10 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
     /**
      * Creates new form PrintLnRemovalWindow
      */
-    public Win_PrintLnRemoval(String text, int count) {
+    public Win_PrintLnRemoval() {
         initComponents();
         this.setLocationRelativeTo(null);
-        jTextArea1.setText(text);
-        jLabel1.setText("Total lines removed: " + count);
+//        jTextArea1.setText(text);
     }
 
     /**
@@ -101,21 +100,21 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to restore previous code?", "Warning", dialogButton);
-        if (dialogResult == JOptionPane.YES_OPTION) {
-
-            try {
-                setVisible(false);
-                dispose();
-                ORPrintLn.RecoverText();
-                JOptionPane.showMessageDialog(null, "Previous code has been restored!");
-            } catch (BadLocationException ex) {
-                Logger.getLogger(Win_PrintLnRemoval.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-        }
+////        int dialogButton = JOptionPane.YES_NO_OPTION;
+////        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to restore previous code?", "Warning", dialogButton);
+////        if (dialogResult == JOptionPane.YES_OPTION) {
+////
+////            try {
+////                setVisible(false);
+////                dispose();
+////                OR_PrintLn.RecoverText();
+////                JOptionPane.showMessageDialog(null, "Previous code has been restored!");
+////            } catch (BadLocationException ex) {
+////                Logger.getLogger(Win_PrintLnRemoval.class.getName()).log(Level.SEVERE, null, ex);
+////            }
+////            
+////            
+////        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -16,7 +16,7 @@ import javax.swing.text.StyleContext;
 //$Objects $OBJS $OBJ $Interface $USER $SELOBJ $SELOBJS $RETURN $ERRMSG $BASE $ILANG $XML $Xml $Date $Check $Math $Strings $Gener $NAME $SERVER true false java
 //https://stackoverflow.com/questions/19765489/jtextpane-highlighting-issue
 //https://stackoverflow.com/questions/14400946/how-to-change-the-color-of-specific-words-in-a-jtextpane
-public class ORHighligter {
+public class OR_Highligter {
 
     private int findLastNonWordChar(String text, int index) {
         while (--index >= 0) {
@@ -37,7 +37,7 @@ public class ORHighligter {
         return index;
     }
 
-    public ORHighligter(JTextPane textPane) {
+    public OR_Highligter(JTextPane textPane) {
 
         final StyleContext cont = StyleContext.getDefaultStyleContext();
         final AttributeSet attrBlue = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, Color.BLUE);
