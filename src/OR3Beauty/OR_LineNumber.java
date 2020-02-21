@@ -9,9 +9,16 @@ public class OR_LineNumber extends JFrame {
 
     private static JTextPane textPane;
     private static JTextArea lines;
+    private static OR_LineNumber instance;
     //private JScrollPane jsp;
 
+    
+    public static OR_LineNumber GetInstance(){
+        return instance;
+    }
+    
     public OR_LineNumber(JTextPane _textPane, JScrollPane jsp) {
+        instance = this;
         textPane = _textPane;
 
         //setTitle("LineNumberTextArea Test");

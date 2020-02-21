@@ -51,7 +51,7 @@ public class OR_PrintLn {
         linePrintLns = new ArrayList<String>();
     }
 
-    public void CleanCode() throws BadLocationException {
+    public void FindAllPrintLns() throws BadLocationException {
 
         ResetLists();
 
@@ -82,6 +82,36 @@ public class OR_PrintLn {
             new Win_PrintLnRemoval().setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Current code does not include any '$Systems.println()' command.");
+        }
+
+    }
+
+    public static void RemoveMarkedPrintLns(JTable table) throws BadLocationException {
+
+        int rowCount = table.getRowCount();
+        Element root = instance.jTextPane.getDocument().getDefaultRootElement();
+
+        //for (int i = 0; i < rowCount; i++) {
+        for (int i = rowCount - 1; i >= 0; i--) {
+
+            boolean isMarked = (boolean) table.getModel().getValueAt(i, 0);
+            if (isMarked) {
+                int lineNum = lineNumbers.get(i);
+
+                Element line = root.getElement(lineNum);
+                //-----
+                int startPos = line.getStartOffset() - 1;
+                int endPos = line.getEndOffset() - line.getStartOffset();
+                //String textLine = line.getDocument().getText(startPos, endPos);
+                //String textLine = line.getDocument().getText(line.getStartOffset(), line.getEndOffset() - line.getStartOffset());
+                //---JOptionPane.showMessageDialog(null, "i=" + i + " lineNum=" + lineNum + " textLine=" + textLine);
+                if (startPos < 0) {
+                    startPos = 0;
+                }
+                line.getDocument().remove(startPos, endPos);
+
+                //break;//DEL
+            }         
         }
 
     }
@@ -124,7 +154,8 @@ public class OR_PrintLn {
 
     /**
      * ЗАПОЛНИТЬ ТАБЛИЦУ ДАННЫМИ ИЗ ЛИСТА
-     * @param table 
+     *
+     * @param table
      */
     public static void FillTable(JTable table) {
 

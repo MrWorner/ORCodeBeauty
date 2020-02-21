@@ -5,11 +5,15 @@
  */
 package UI;
 
+import OR3Beauty.OR_LineNumber;
 import OR3Beauty.OR_PrintLn;
 import OR3Beauty.OR_PrintLnTableRenderer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -23,24 +27,22 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
     public Win_PrintLnRemoval() {
         initComponents();
         Init();
-       
+
     }
-    
+
     /**
      * ДОПОЛНИТЕЛЬНАЯ ИНИЦИАЛИЗАЦИЯ
      */
-    void Init(){
+    void Init() {
         this.setLocationRelativeTo(null);
-        
+
         final TableColumnModel columnModel = jTable1.getColumnModel();
-        columnModel.getColumn(0).setMaxWidth(50);      
+        columnModel.getColumn(0).setMaxWidth(50);
         jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-        
-        jTable1.setDefaultRenderer(Object.class, new OR_PrintLnTableRenderer());
-        
+
+        //jTable1.setDefaultRenderer(Object.class, new OR_PrintLnTableRenderer());
         OR_PrintLn.FillTable(jTable1);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -200,9 +202,16 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove selected lines?", "Warning", dialogButton);
         if (dialogResult == JOptionPane.YES_OPTION) {
-            setVisible(false);
-            dispose();
-            JOptionPane.showMessageDialog(null, "Selected lines removed!");
+
+            try {
+                OR_PrintLn.RemoveMarkedPrintLns(jTable1);
+                OR_LineNumber.GetInstance().CountLines();
+                setVisible(false);
+                dispose();
+                JOptionPane.showMessageDialog(null, "Selected lines were removed!");
+            } catch (BadLocationException ex) {
+                Logger.getLogger(Win_PrintLnRemoval.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

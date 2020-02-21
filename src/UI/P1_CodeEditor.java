@@ -161,7 +161,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             or3Beauty.CleanCode(jTextPane1);
-            //csgta.CleanCode();            
+            //csgta.FindAllPrintLns();            
         } catch (BadLocationException ex) {
             Logger.getLogger(P1_CodeEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -169,8 +169,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            orPrintLnRemover.CleanCode();
-            orLineNumber.CountLines();
+            orPrintLnRemover.FindAllPrintLns();
         } catch (BadLocationException ex) {
             Logger.getLogger(Win_MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
