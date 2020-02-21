@@ -9,9 +9,10 @@ import OR3Beauty.OR_PrintLn;
 import javax.swing.JTextPane;
 
 /**
- *
- * @author User
+ * 
+ * @author MaximGodyna
  */
+
 public class Win_AddPrintLn extends javax.swing.JFrame {
 
     private static Win_AddPrintLn instance;

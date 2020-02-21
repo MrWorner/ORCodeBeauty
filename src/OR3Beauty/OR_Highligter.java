@@ -16,8 +16,20 @@ import javax.swing.text.StyleContext;
 //$Objects $OBJS $OBJ $Interface $USER $SELOBJ $SELOBJS $RETURN $ERRMSG $BASE $ILANG $XML $Xml $Date $Check $Math $Strings $Gener $NAME $SERVER true false java
 //https://stackoverflow.com/questions/19765489/jtextpane-highlighting-issue
 //https://stackoverflow.com/questions/14400946/how-to-change-the-color-of-specific-words-in-a-jtextpane
+
+/**
+ * 
+ * @author MaximGodyna
+ */
+
 public class OR_Highligter {
 
+    /**
+     * Найти последний смвол 
+     * @param text
+     * @param index
+     * @return 
+     */
     private int findLastNonWordChar(String text, int index) {
         while (--index >= 0) {
             if (String.valueOf(text.charAt(index)).matches("\\W")) {
@@ -27,6 +39,12 @@ public class OR_Highligter {
         return index;
     }
 
+    /**
+     * Найти первый символ
+     * @param text
+     * @param index
+     * @return 
+     */
     private int findFirstNonWordChar(String text, int index) {
         while (index < text.length()) {
             if (String.valueOf(text.charAt(index)).matches("\\W")) {
@@ -37,6 +55,10 @@ public class OR_Highligter {
         return index;
     }
 
+    /**
+     * Подсветка синтаксиса
+     * @param textPane 
+     */
     public OR_Highligter(JTextPane textPane) {
 
         final StyleContext cont = StyleContext.getDefaultStyleContext();
@@ -51,6 +73,7 @@ public class OR_Highligter {
         final String commandsPack_3 = "(\\W)*($)";
         
         DefaultStyledDocument doc = new DefaultStyledDocument() {
+            @Override
             public void insertString(int offset, String str, AttributeSet a) throws BadLocationException {
                 super.insertString(offset, str, a);
 
@@ -80,6 +103,7 @@ public class OR_Highligter {
                 }
             }
 
+            @Override
             public void remove(int offs, int len) throws BadLocationException {
                 super.remove(offs, len);
 

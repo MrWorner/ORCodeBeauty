@@ -2,29 +2,46 @@ package OR3Beauty;
 
 import javax.swing.text.*;
 
+/**
+ * 
+ * @author MaximGodyna
+ */
+
+
 public class OR_TabSizeEditorKit extends StyledEditorKit {
 
     public static final int TAB_SIZE = 40;
 
+    /**
+     * Получить ViewFactory
+     * @return 
+     */
     public ViewFactory getViewFactory() {
         return new MyViewFactory();
     }
 
+    /**
+     *  ViewFactory
+     */
     static class MyViewFactory implements ViewFactory {
 
+        @Override
         public View create(Element elem) {
             String kind = elem.getName();
             if (kind != null) {
-                if (kind.equals(AbstractDocument.ContentElementName)) {
-                    return new LabelView(elem);
-                } else if (kind.equals(AbstractDocument.ParagraphElementName)) {
-                    return new CustomTabParagraphView(elem);
-                } else if (kind.equals(AbstractDocument.SectionElementName)) {
-                    return new BoxView(elem, View.Y_AXIS);
-                } else if (kind.equals(StyleConstants.ComponentElementName)) {
-                    return new ComponentView(elem);
-                } else if (kind.equals(StyleConstants.IconElementName)) {
-                    return new IconView(elem);
+                switch (kind) {
+                    case AbstractDocument.ContentElementName:
+                        return new LabelView(elem);
+                    case AbstractDocument.ParagraphElementName:
+                        return new CustomTabParagraphView(elem);
+                    case AbstractDocument.SectionElementName:
+                        return new BoxView(elem, View.Y_AXIS);
+                    case StyleConstants.ComponentElementName:
+                        return new ComponentView(elem);
+                    case StyleConstants.IconElementName:
+                        return new IconView(elem);
+                    default:
+                        break;
                 }
             }
 
@@ -32,12 +49,16 @@ public class OR_TabSizeEditorKit extends StyledEditorKit {
         }
     }
 
+    /**
+     * Кастомный класс ParagraphView
+     */
     static class CustomTabParagraphView extends ParagraphView {
 
         public CustomTabParagraphView(Element elem) {
             super(elem);
         }
 
+        @Override
         public float nextTabStop(float x, int tabOffset) {
             TabSet tabs = getTabSet();
             if (tabs == null) {

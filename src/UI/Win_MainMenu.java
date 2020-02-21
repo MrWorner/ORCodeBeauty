@@ -13,6 +13,11 @@ import javax.swing.border.TitledBorder;
 import OR3Beauty.*;
 import main.Global;
 
+/**
+ * 
+ * @author MaximGodyna
+ */
+
 public class Win_MainMenu extends javax.swing.JFrame {
 
     // StudMarksTest StudMarksTest = new StudMarksTest();

@@ -9,9 +9,10 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 
+
 /**
- * https://coderanch.com/t/339854/java/jTable-setBackground-Color-Row
- * @author User
+ *  https://coderanch.com/t/339854/java/jTable-setBackground-Color-Row
+ * @author MaximGodyna
  */
 
 public class OR_PrintLnTableRenderer extends DefaultTableCellRenderer 
@@ -21,6 +22,7 @@ public class OR_PrintLnTableRenderer extends DefaultTableCellRenderer
         super();
         setOpaque(true);
     } 
+    @Override
     public Component getTableCellRendererComponent(JTable table, Object value, 
             boolean isSelected, boolean hasFocus, int row, int column) 
     { 

@@ -5,6 +5,11 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.Element;
 
+/**
+ * 
+ * @author MaximGodyna
+ */
+
 public class OR_LineNumber extends JFrame {
 
     private static JTextPane textPane;
@@ -12,11 +17,19 @@ public class OR_LineNumber extends JFrame {
     private static OR_LineNumber instance;
     //private JScrollPane jsp;
 
-    
+    /**
+     * Получить сиглтон
+     * @return 
+     */
     public static OR_LineNumber GetInstance(){
         return instance;
     }
     
+    /**
+     * Установка компонентов для подсчета строк
+     * @param _textPane
+     * @param jsp 
+     */
     public OR_LineNumber(JTextPane _textPane, JScrollPane jsp) {
         instance = this;
         textPane = _textPane;
@@ -62,6 +75,9 @@ public class OR_LineNumber extends JFrame {
         //lines.setSize(1, 1);
     }
 
+    /**
+     * Подсчет строк
+     */
     public void CountLines() {
         if (textPane != null) {
 

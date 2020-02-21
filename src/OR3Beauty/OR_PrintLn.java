@@ -21,10 +21,12 @@ import javax.swing.table.DefaultTableModel;
 
 //import com.sun.xml.internal.ws.util.StringUtils;
 //import org.apache.commons.lang3.StringUtils;
+
 /**
- *
- * @author User
+ * 
+ * @author MaximGodyna
  */
+
 public class OR_PrintLn {
 
     public static OR_PrintLn instance;
@@ -33,7 +35,7 @@ public class OR_PrintLn {
     public static List<Integer> lineNumbers = new ArrayList<Integer>();
     public static List<String> linePrintLns = new ArrayList<String>();
 
-    private JTextPane jTextPane;
+    private final JTextPane jTextPane;
     private List<String> listOfRecoveryLines;
 
     /**
@@ -46,14 +48,21 @@ public class OR_PrintLn {
         instance = this;
     }
 
-    private void ResetLists() {
-        lineNumbers = new ArrayList<Integer>();
-        linePrintLns = new ArrayList<String>();
+    /**
+     * Очистить листы результатов
+     */
+    private void ResetResults() {
+        lineNumbers = new ArrayList<>();
+        linePrintLns = new ArrayList<>();
     }
 
+    /**
+     * Найти все Принты
+     * @throws BadLocationException 
+     */
     public void FindAllPrintLns() throws BadLocationException {
 
-        ResetLists();
+        ResetResults();
 
         Element _root = jTextPane.getDocument().getDefaultRootElement();
         int totalLines = _root.getElementCount();
@@ -86,6 +95,11 @@ public class OR_PrintLn {
 
     }
 
+    /**
+     * Удалить выбранные принты
+     * @param table
+     * @throws BadLocationException 
+     */
     public static void RemoveMarkedPrintLns(JTable table) throws BadLocationException {
 
         int rowCount = table.getRowCount();
@@ -104,18 +118,29 @@ public class OR_PrintLn {
                 int endPos = line.getEndOffset() - line.getStartOffset();
                 //String textLine = line.getDocument().getText(startPos, endPos);
                 //String textLine = line.getDocument().getText(line.getStartOffset(), line.getEndOffset() - line.getStartOffset());
-                //---JOptionPane.showMessageDialog(null, "i=" + i + " lineNum=" + lineNum + " textLine=" + textLine);
+                
                 if (startPos < 0) {
                     startPos = 0;
                 }
+                
+                int lenght = instance.jTextPane.getText().length();
+                if (endPos > lenght) {
+                    endPos = lenght;
+                }
+                               
+                //JOptionPane.showMessageDialog(null, "i=" + i + " lineNum=" + lineNum + " startPos=" + startPos + " endPos=" + endPos + " lenght =" + lenght);
                 line.getDocument().remove(startPos, endPos);
-
                 //break;//DEL
             }         
         }
 
     }
 
+    /**
+     * Отформатировать строку в нужный вид
+     * @param textLine
+     * @return 
+     */
     private String FormatLine(String textLine) {
 
         textLine = textLine.replaceAll("\t", "");//УДАЛЯЕМ ВСЕ СИМВОЛЫ TAB 
@@ -123,6 +148,11 @@ public class OR_PrintLn {
         return textLine;
     }
 
+    /**
+     * Является данная строка командой Принта?
+     * @param text
+     * @return 
+     */
     private boolean isPrintLn(String text) {
         boolean result = false;
         int i = text.indexOf("//");//получаем позицию символа //
@@ -138,7 +168,11 @@ public class OR_PrintLn {
         return result;
     }
 
-    //---- ДОБАВИТЬ $Systems.println в строку на позиции курсора 
+    /**
+     * ДОБАВИТЬ $Systems.println в строку на позиции курсора 
+     * @param _textPane
+     * @param text 
+     */
     public static void AddPrintLn(JTextPane _textPane, String text) {
         try {
 

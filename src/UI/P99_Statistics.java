@@ -6,9 +6,11 @@
 package UI;
 
 /**
- *
- * @author user
+ * 
+ * @author MaximGodyna
  */
+
+
 public class P99_Statistics extends javax.swing.JPanel {
 
     /**

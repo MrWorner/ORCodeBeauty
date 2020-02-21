@@ -8,8 +8,8 @@ package OR3Beauty;
 import java.util.List;
 
 /**
- *
- * @author User
+ * 
+ * @author MaximGodyna
  */
 public class OR_TextMerger {
     public static String MergeText(List<String> listOfLines) {

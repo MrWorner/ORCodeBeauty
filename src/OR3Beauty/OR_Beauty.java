@@ -19,9 +19,14 @@ import javax.swing.text.Element;
 
 //$Objects $OBJS $OBJ $Interface $USER $SELOBJ $SELOBJS $RETURN $ERRMSG $BASE $ILANG $XML $Xml $Date $Check $Math $Strings $Gener $NAME $SERVER true false java
 //shift + Alt + F
+
+/**
+ * 
+ * @author MaximGodyna
+ */
+
 public class OR_Beauty {
 
-    //private JTextPane jTextPane;
     private int needToAddTab = 0;// сколько нужно добавить символов Tab
     private int needToAddTab_comment = 0;// сколько нужно добавить символов Tab (для комментариев)
     private int currentEmptyLine = 0;// текущая пустая линия
@@ -29,14 +34,12 @@ public class OR_Beauty {
     private boolean isCommentedLine_brakets = false;// является ли текущая строка комментарием в /*   */
     private boolean isCommentedLine_classic = false;// является ли текущая строка комментарием //
 
-    //----КОНСТРУКТОР
-    public OR_Beauty(JTextPane textPane) {
-        //jTextPane = textPane;
-        
-        
-    }
 
-    //----ГЛАВНЫЙ МЕТОД ПО СОЗДАНИЮ КРАСОТЫ КОДА
+    /**
+     * ГЛАВНЫЙ МЕТОД ПО СОЗДАНИЮ КРАСОТЫ КОДА
+     * @param textPane
+     * @throws BadLocationException 
+     */    
     public void CleanCode(JTextPane textPane) throws BadLocationException {
 
         needToAddTab = 0;// сколько нужно добавить символов Tab
@@ -74,15 +77,25 @@ public class OR_Beauty {
         }
     }
 
+    /**
+     * Удалить все символы ТАБ
+     * @param text
+     * @return 
+     */
     private String RemoveTabs(String text) {
-        text = text.replaceAll("\t", "");//УДАЛЯЕМ ВСЕ СИМВОЛЫ TAB
+        text = text.replaceAll("\t", "");// УДАЛЯЕМ ВСЕ СИМВОЛЫ TAB
         return text;
     }
 
+    /**
+     * Удаляем все пробелы до первого слова
+     * @param text
+     * @return 
+     */
     private String RemoveSpaceBeforeAny(String text) {
 
-        //_text = _text.replaceAll("\n", "");//УДАЛЯЕМ ВСЕ С НОВОЙ СТРОКИ
-        //_text = _text.replaceAll(" ", "");//УДАЛЯЕМ ВСЕ ПРОБЕЛЫ
+        //_text = _text.replaceAll("\n", "");// УДАЛЯЕМ ВСЕ С НОВОЙ СТРОКИ
+        //_text = _text.replaceAll(" ", "");// УДАЛЯЕМ ВСЕ ПРОБЕЛЫ
         String finalText = "";
         boolean removedFirstSpaces = false;
         for (char ch : text.toCharArray()) {
@@ -95,9 +108,14 @@ public class OR_Beauty {
         return finalText;
     }
 
+    /**
+     * Добавляем символы ТАБ сколько необходимо
+     * @param text
+     * @return 
+     */
     private String AddRightTabs(String text) {
 
-        int i = text.indexOf("//");//получаем позицию символа //
+        int i = text.indexOf("//");// получаем позицию символа //
         boolean i_EXISTS = i > -1;
 
         //BEGIN ВЫРЕЗАЕМ КОММЕНТАРИИ, ЧТОБЫ ИЗБАВИТЬСЯ ОТ ПРОВЕРОК
@@ -110,7 +128,7 @@ public class OR_Beauty {
                 arrOfStr[0] = "//";
                 boolean first = true;
                 for (String a : arrOfStr) {
-                    if (a != "//") {
+                    if (!"//".equals(a)) {
 
                         if (first) {
                             cuttedText = cuttedText + a;
@@ -131,17 +149,17 @@ public class OR_Beauty {
         //BEGIN ДЛЯ ЗАКОМЕНТИРОВАННОЙ СТРОКИ С ПОМОЩЬЮ '//'
         if (text.length() == 0) {
 
-            if (cuttedText.length() > 0) { //если есть только комментарии комментарии
+            if (cuttedText.length() > 0) { // если есть только комментарии комментарии
                 //---------------System.out.println("_cuttedText = " + _cuttedText + " needToAddTab_comment = " + needToAddTab_comment);
                 text = cuttedText;
-                if (!isCommentedLine_classic) {//если режим НЕ включен, то включаем
+                if (!isCommentedLine_classic) {// если режим НЕ включен, то включаем
                     isCommentedLine_classic = true;
                     isCommentedLine_brakets = true;
                 }
 
             } else//если нет комментарии
             {
-                if (isCommentedLine_classic) {//если режим включен, то отключаем
+                if (isCommentedLine_classic) {// если режим включен, то отключаем
                     isCommentedLine_classic = false;
                     isCommentedLine_brakets = false;
                     needToAddTab_comment = 0;
@@ -149,7 +167,7 @@ public class OR_Beauty {
             }
 
         } else {
-            if (isCommentedLine_classic) {//если режим включен, то отключаем
+            if (isCommentedLine_classic) {// если режим включен, то отключаем
                 isCommentedLine_classic = false;
                 isCommentedLine_brakets = false;
                 needToAddTab_comment = 0;
@@ -158,8 +176,8 @@ public class OR_Beauty {
         //END ДЛЯ ЗАКОМЕНТИРОВАННОЙ СТРОКИ С ПОМОЩЬЮ '//'
 
         //-------ВОЗМОЖНО ПОТРЕБУЕТСЯ НЕМНОГО ИЗМЕНИТЬ ЛОГИКУ ЕСЛИ ВДРУГ НА ОДНОЙ ЛИНИИ БУДУТ КОММЕНТЫ напр: /* */ /* */
-        int i_begin = text.indexOf("/*");//получаем позицию символа {*
-        int i_end = text.indexOf("*/");//получаем позицию символа {*
+        int i_begin = text.indexOf("/*");// получаем позицию символа {*
+        int i_end = text.indexOf("*/");// получаем позицию символа {*
         boolean i_begin_EXISTS = i_begin > -1;
         boolean i_end_EXISTS = i_end > -1;
 
@@ -172,40 +190,40 @@ public class OR_Beauty {
             }
         }
 
-        int x_if = text.indexOf("#if");//получаем позицию команды #if
-        int x_while = text.indexOf("#while");//получаем позицию команды #while        
-        int x_foreach = text.indexOf("#foreach");//получаем позицию команды #foreach
-        int x_end = text.indexOf("#end");//24.01.2020 NEW получаем позицию команды #end |  кто то помжет писать код в одну строку: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end
+        int x_if = text.indexOf("#if");// получаем позицию команды #if
+        int x_while = text.indexOf("#while");// получаем позицию команды #while        
+        int x_foreach = text.indexOf("#foreach");// получаем позицию команды #foreach
+        int x_end = text.indexOf("#end");//2 4.01.2020 NEW получаем позицию команды #end |  кто то помжет писать код в одну строку: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end
 
         boolean x_if_EXISTS = x_if > -1;
         boolean x_while_EXISTS = x_while > -1;
         boolean x_foreach_EXISTS = x_foreach > -1;
         boolean x_end_EXISTS = x_end > -1;
 
-        if (x_if_EXISTS || x_while_EXISTS || x_foreach_EXISTS) //проверяем, есть ли одна из команд, которая открывает блок
+        if (x_if_EXISTS || x_while_EXISTS || x_foreach_EXISTS) // проверяем, есть ли одна из команд, которая открывает блок
         {
             boolean isOpening = true;
-            if (x_end_EXISTS) {//Проверяем есть ли блок закрытия, если вдруг будет, то возможно придется игнорировать само открытие
+            if (x_end_EXISTS) {// Проверяем есть ли блок закрытия, если вдруг будет, то возможно придется игнорировать само открытие
                 if ((x_end > x_if && x_if_EXISTS) || (x_end > x_while && x_while_EXISTS) || (x_end > x_foreach && x_foreach_EXISTS)) {
-                    isOpening = false;//код написан в одну строку с открытием и закрытием, пример: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end. Значит игнорируем строку
+                    isOpening = false;// код написан в одну строку с открытием и закрытием, пример: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end. Значит игнорируем строку
                 }
             }
             if (isOpening) {
                 text = OpeningBlock(text);
             }
-        } else {//если нет команды, которая открывает блок, то проверяем - не имеется ли команда закрытия блока (#end)
+        } else {// если нет команды, которая открывает блок, то проверяем - не имеется ли команда закрытия блока (#end)
 
             //int x_end = _text.indexOf("#end");//ОТКЛЮЧЕН 24.01.2020 получаем позицию команды #end 
-            int x_else = text.indexOf("#else");//получаем позицию команды #else
-            int x_elseif = text.indexOf("#elseif");//получаем позицию команды #elseif
+            int x_else = text.indexOf("#else");// получаем позицию команды #else
+            int x_elseif = text.indexOf("#elseif");// получаем позицию команды #elseif
 
             //boolean x_end_ALIVE = x_end > -1;//ОТКЛЮЧЕН 24.01.2020
             boolean x_else_EXISTS = x_else > -1;
             boolean x_elseif_EXISTS = x_elseif > -1;
 
-            if (x_end_EXISTS || x_else_EXISTS || x_elseif_EXISTS) {//если есть команда закрытие блока
+            if (x_end_EXISTS || x_else_EXISTS || x_elseif_EXISTS) {// если есть команда закрытие блока
                 text = ClosingBlock(text, x_end_EXISTS);
-            } else {//если нет команд открытия или закрытия блока, то просто для обычного текста
+            } else {// если нет команд открытия или закрытия блока, то просто для обычного текста
                 text = SimpleText(text);
             }
         }
@@ -222,6 +240,11 @@ public class OR_Beauty {
         return text;
     }
 
+    /**
+     * Открывающий блок
+     * @param text
+     * @return 
+     */
     private String OpeningBlock(String text) {
 
         for (int j = 0; j < needToAddTab; j++) {
@@ -245,6 +268,12 @@ public class OR_Beauty {
         return text;
     }
 
+    /**
+     * Закрывающий блок
+     * @param text
+     * @param isEndTag
+     * @return 
+     */
     private String ClosingBlock(String text, boolean isEndTag) {
         if (!isCommentedLine_brakets) {
             needToAddTab--;
@@ -276,6 +305,11 @@ public class OR_Beauty {
         return text;
     }
 
+    /**
+     * Склеиваем обычный текст кода
+     * @param text
+     * @return 
+     */
     private String SimpleText(String text) {
 
         for (int j = 0; j < needToAddTab; j++) {
@@ -290,10 +324,15 @@ public class OR_Beauty {
         return text;
     }
 
+    /**
+     * Удалить доп пустые строки
+     * @param text
+     * @return 
+     */
     private boolean RemoveExtraEmptyLines(String text) {
         boolean remove = false;
 
-        if (text.length() == 0 || text == " ") {
+        if (text.length() == 0 || " ".equals(text)) {
             currentEmptyLine++;
             if (currentEmptyLine > 1) {
                 remove = true;

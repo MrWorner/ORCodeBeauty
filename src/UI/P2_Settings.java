@@ -1,19 +1,16 @@
 package UI;
 
-import java.awt.Color;
-import java.security.MessageDigest;
-import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import main.Global;
+
+/**
+ * 
+ * @author MaximGodyna
+ */
 
 public class P2_Settings extends javax.swing.JPanel {
 

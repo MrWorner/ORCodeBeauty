@@ -9,11 +9,12 @@ import OR3Beauty.*;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
 /**
  *
- * @author User
+ * @author MaximGodyna
  */
 public class P1_CodeEditor extends javax.swing.JPanel {
 
@@ -30,10 +31,11 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         jTextPane1.setEditorKit(new OR_TabSizeEditorKit());
         or3Highligter = new OR_Highligter(jTextPane1);
         orLineNumber = new OR_LineNumber(jTextPane1, jScrollPane2);
-        or3Beauty = new OR_Beauty(jTextPane1);
+        or3Beauty = new OR_Beauty();
         //csgta = new CSgta(jTextPane1);
         orPrintLnRemover = new OR_PrintLn(jTextPane1);
         jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \nAAAAAAAAAAAAAAAA \nBBBBBBBB \n$Systems.println(\"test 99\")");
+        orLineNumber.CountLines();
     }
 
     public static P1_CodeEditor getInstance() {
@@ -184,13 +186,18 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextPane1KeyReleased
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jTextPane1.setText("");
-        orLineNumber.CountLines();
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(null, "All lines will be removed.", "Warning", dialogButton);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            jTextPane1.setText("");
+            orLineNumber.CountLines();
+        }
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         //Win_AddPrintLn win_PrintLnRemovalnew =
-        new Win_AddPrintLn(jTextPane1).setVisible(true);      
+        new Win_AddPrintLn(jTextPane1).setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
 
