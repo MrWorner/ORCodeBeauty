@@ -7,6 +7,8 @@ package UI;
 
 import OR3Beauty.OR_LineNumber;
 import OR3Beauty.OR_PrintLn;
+import static OR3Beauty.OR_PrintLn.instance;
+import static OR3Beauty.OR_PrintLn.lineNumbers;
 import OR3Beauty.OR_PrintLnTableRenderer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
 
 /**
  *
@@ -96,6 +99,11 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
         jTable1.setShowHorizontalLines(false);
         jTable1.setShowVerticalLines(false);
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
         jTable1.setTableHeader(null);
 
@@ -117,6 +125,11 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
         });
 
         jButton3.setText("Select All");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -124,6 +137,11 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
         });
 
         jButton4.setText("Deselect All");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -220,13 +238,25 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        ButtonEnabilityManager();
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        ButtonEnabilityManager();
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        ButtonEnabilityManager();
+    }//GEN-LAST:event_jButton4MouseClicked
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         int rowCount = jTable1.getRowCount();
         for (int i = 0; i < rowCount; i++) {
             jTable1.getModel().setValueAt(true, i, 0);
         }
-
+        ButtonEnabilityManager();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -235,7 +265,23 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
         for (int i = 0; i < rowCount; i++) {
             jTable1.getModel().setValueAt(false, i, 0);
         }
+        ButtonEnabilityManager();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void ButtonEnabilityManager() {
+        if (jButton2.isEnabled()) {
+            jButton2.setEnabled(false);
+        }
+
+        int rowCount = jTable1.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            boolean isMarked = (boolean) jTable1.getModel().getValueAt(i, 0);
+            if (isMarked) {
+                jButton2.setEnabled(true);
+                break;
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
