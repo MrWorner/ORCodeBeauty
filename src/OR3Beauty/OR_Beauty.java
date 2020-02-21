@@ -71,6 +71,12 @@ public class OR_Beauty {
 
         String finalText = OR_TextMerger.MergeText(FinalListOfLines);// Слияние всех строк
         textPane.setText(finalText);// Прикрепляем к JTextPane
+        
+        int charCount = textPane.getText().length();
+        if (currentCaretPos > charCount) {
+            currentCaretPos = charCount;
+        }
+        
         textPane.setCaretPosition(currentCaretPos);
         if (needToAddTab > 0) {// Если вдруг неравное количество необх добавлений Таба, то значит где то нехватает #end, код в тексте сломан
             JOptionPane.showMessageDialog(null, "Ooops. Missing #end tag(s): " + needToAddTab);

@@ -35,7 +35,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         //csgta = new CSgta(jTextPane1);
         orPrintLnRemover = new OR_PrintLn(jTextPane1);
         jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \nAAAAAAAAAAAAAAAA \nBBBBBBBB \n$Systems.println(\"test 99\")");
-        orLineNumber.CountLines();
+        orLineNumber.Refresh();
     }
 
     public static P1_CodeEditor getInstance() {
@@ -163,6 +163,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             or3Beauty.CleanCode(jTextPane1);
+            orLineNumber.Refresh();
             //csgta.FindAllPrintLns();            
         } catch (BadLocationException ex) {
             Logger.getLogger(P1_CodeEditor.class.getName()).log(Level.SEVERE, null, ex);
@@ -182,7 +183,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextPane1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyReleased
-        orLineNumber.CountLines();
+        orLineNumber.Refresh();
     }//GEN-LAST:event_jTextPane1KeyReleased
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -190,7 +191,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         int dialogResult = JOptionPane.showConfirmDialog(null, "All lines will be removed.", "Warning", dialogButton);
         if (dialogResult == JOptionPane.YES_OPTION) {
             jTextPane1.setText("");
-            orLineNumber.CountLines();
+            orLineNumber.Refresh();
         }
 
     }//GEN-LAST:event_jButton4ActionPerformed

@@ -78,7 +78,7 @@ public class OR_LineNumber extends JFrame {
     /**
      * Подсчет строк
      */
-    public void CountLines() {
+    public void Refresh() {
         if (textPane != null) {
 
             int caretPosition = textPane.getDocument().getLength();

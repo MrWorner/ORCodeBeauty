@@ -204,7 +204,7 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
 
             try {
                 OR_PrintLn.RemoveMarkedPrintLns(jTable1);
-                OR_LineNumber.GetInstance().CountLines();
+                OR_LineNumber.GetInstance().Refresh();
                 setVisible(false);
                 dispose();
                 JOptionPane.showMessageDialog(null, "Selected lines were removed!");
