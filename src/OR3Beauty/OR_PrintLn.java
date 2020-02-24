@@ -21,12 +21,10 @@ import javax.swing.table.DefaultTableModel;
 
 //import com.sun.xml.internal.ws.util.StringUtils;
 //import org.apache.commons.lang3.StringUtils;
-
 /**
- * 
+ *
  * @author MaximGodyna
  */
-
 public class OR_PrintLn {
 
     public static OR_PrintLn instance;
@@ -58,7 +56,8 @@ public class OR_PrintLn {
 
     /**
      * Найти все Принты
-     * @throws BadLocationException 
+     *
+     * @throws BadLocationException
      */
     public void FindAllPrintLns() throws BadLocationException {
 
@@ -97,8 +96,9 @@ public class OR_PrintLn {
 
     /**
      * Удалить выбранные принты
+     *
      * @param table
-     * @throws BadLocationException 
+     * @throws BadLocationException
      */
     public static void RemoveMarkedPrintLns(JTable table) throws BadLocationException {
 
@@ -118,28 +118,29 @@ public class OR_PrintLn {
                 int endPos = line.getEndOffset() - line.getStartOffset();
                 //String textLine = line.getDocument().getText(startPos, endPos);
                 //String textLine = line.getDocument().getText(line.getStartOffset(), line.getEndOffset() - line.getStartOffset());
-                
+
                 if (startPos < 0) {
                     startPos = 0;
                 }
-                
+
                 int lenght = instance.jTextPane.getText().length();
                 if (endPos > lenght) {
                     endPos = lenght;
                 }
-                               
+
                 //JOptionPane.showMessageDialog(null, "i=" + i + " lineNum=" + lineNum + " startPos=" + startPos + " endPos=" + endPos + " lenght =" + lenght);
                 line.getDocument().remove(startPos, endPos);
                 //break;//DEL
-            }         
+            }
         }
 
     }
 
     /**
      * Отформатировать строку в нужный вид
+     *
      * @param textLine
-     * @return 
+     * @return
      */
     private String FormatLine(String textLine) {
 
@@ -150,8 +151,9 @@ public class OR_PrintLn {
 
     /**
      * Является данная строка командой Принта?
+     *
      * @param text
-     * @return 
+     * @return
      */
     private boolean isPrintLn(String text) {
         boolean result = false;
@@ -169,9 +171,10 @@ public class OR_PrintLn {
     }
 
     /**
-     * ДОБАВИТЬ $Systems.println в строку на позиции курсора 
+     * ДОБАВИТЬ $Systems.println в строку на позиции курсора
+     *
      * @param _textPane
-     * @param text 
+     * @param text
      */
     public static void AddPrintLn(JTextPane _textPane, String text) {
         try {
@@ -200,5 +203,8 @@ public class OR_PrintLn {
         }
 
     }
+
+   
+  
 
 }

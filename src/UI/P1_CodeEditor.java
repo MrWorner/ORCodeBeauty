@@ -23,7 +23,8 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     private OR_Highligter or3Highligter;
     private OR_LineNumber orLineNumber;
     private OR_Beauty or3Beauty;
-    private OR_PrintLn orPrintLnRemover;
+    private OR_PrintLn orPrintLn;
+    private OR_PrintLnAdvanced orPrintLnAdvanced;
 
     public P1_CodeEditor() {
         initComponents();
@@ -33,8 +34,12 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         orLineNumber = new OR_LineNumber(jTextPane1, jScrollPane2);
         or3Beauty = new OR_Beauty();
         //csgta = new CSgta(jTextPane1);
-        orPrintLnRemover = new OR_PrintLn(jTextPane1);
-        jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \nAAAAAAAAAAAAAAAA \nBBBBBBBB \n$Systems.println(\"test 99\")");
+        orPrintLn = new OR_PrintLn(jTextPane1);
+        orPrintLnAdvanced = new OR_PrintLnAdvanced();
+        //jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \nAAAAAAAAAAAAAAAA \nBBBBBBBB \n$Systems.println(\"test 99\")");
+       
+         jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \n#if($attrib)\nBBBBBBBB \n$Systems.println(\"test 99\")");
+        
         orLineNumber.Refresh();
     }
 
@@ -91,8 +96,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Code analyzer");
-        jButton2.setEnabled(false);
+        jButton2.setText("Add PrLn EveryWhere");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -140,8 +144,8 @@ public class P1_CodeEditor extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 144, Short.MAX_VALUE)))
+                        .addComponent(jButton2)
+                        .addGap(0, 109, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -172,14 +176,18 @@ public class P1_CodeEditor extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            orPrintLnRemover.FindAllPrintLns();
+            orPrintLn.FindAllPrintLns();
         } catch (BadLocationException ex) {
             Logger.getLogger(Win_MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        try {
+            orPrintLnAdvanced.Start(jTextPane1);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(P1_CodeEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }                                     
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextPane1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyReleased
@@ -193,9 +201,10 @@ public class P1_CodeEditor extends javax.swing.JPanel {
             jTextPane1.setText("");
             orLineNumber.Refresh();
         }
-
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    
+    
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         //Win_AddPrintLn win_PrintLnRemovalnew =
         new Win_AddPrintLn(jTextPane1).setVisible(true);

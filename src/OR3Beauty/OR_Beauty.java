@@ -263,10 +263,10 @@ public class OR_Beauty {
             }
         }
         
-        System.out.println("BEFORE OpeningBlock _text = " + text + " needToAddTab_comment = " + needToAddTab_comment);
+        //System.out.println("BEFORE OpeningBlock _text = " + text + " needToAddTab_comment = " + needToAddTab_comment);
         if (isCommentedLine_brakets) {
             needToAddTab_comment++;
-            System.out.println("OpeningBlock _text = " + text + " needToAddTab_comment = " + needToAddTab_comment);
+            //System.out.println("OpeningBlock _text = " + text + " needToAddTab_comment = " + needToAddTab_comment);
         } else {
             needToAddTab++;
         }
