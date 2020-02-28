@@ -37,9 +37,9 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         orPrintLn = new OR_PrintLn(jTextPane1);
         orPrintLnAdvanced = new OR_PrintLnAdvanced();
         //jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \nAAAAAAAAAAAAAAAA \nBBBBBBBB \n$Systems.println(\"test 99\")");
-       
-         jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \n#if($attrib)\nBBBBBBBB \n$Systems.println(\"test 99\")");
-        
+
+        jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \n#if($attrib)\nBBBBBBBB \n$Systems.println(\"test 99\")");
+
         orLineNumber.Refresh();
     }
 
@@ -138,14 +138,14 @@ public class P1_CodeEditor extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addGap(0, 109, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -185,9 +185,12 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             orPrintLnAdvanced.Start(jTextPane1);
+            new Win_AddPrintLn(jTextPane1).setVisible(true);
+            or3Beauty.CleanCode(jTextPane1);
         } catch (BadLocationException ex) {
             Logger.getLogger(P1_CodeEditor.class.getName()).log(Level.SEVERE, null, ex);
-        }                                     
+        }
+        orLineNumber.Refresh();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextPane1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyReleased
@@ -203,11 +206,15 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    
-    
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         //Win_AddPrintLn win_PrintLnRemovalnew =
-        new Win_AddPrintLn(jTextPane1).setVisible(true);
+        try {
+            new Win_AddPrintLn(jTextPane1).setVisible(true);
+            or3Beauty.CleanCode(jTextPane1);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(P1_CodeEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        orLineNumber.Refresh();
     }//GEN-LAST:event_jButton5ActionPerformed
 
 
