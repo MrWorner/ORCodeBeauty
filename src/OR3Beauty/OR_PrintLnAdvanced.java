@@ -138,6 +138,7 @@ public class OR_PrintLnAdvanced {
 
         text = CutComentedLine(text);//ВЫРЕЗАЕМ КОММЕНТАРИИ        
         int x_if = text.indexOf("#if");// получаем позицию команды #if
+        int x_function = text.indexOf("#function");// получаем позицию команды #function NEW 28.02.2020 
         int x_while = text.indexOf("#while");// получаем позицию команды #while        
         int x_foreach = text.indexOf("#foreach");// получаем позицию команды #foreach
         int x_else = text.indexOf("#else");// получаем позицию команды #foreach       
@@ -146,7 +147,7 @@ public class OR_PrintLnAdvanced {
         boolean result = false;
         //System.out.println("text = " + text + " x_if = " + x_if);
 
-        List<Integer> listOfResults = Arrays.asList(x_if, x_while, x_foreach, x_else, x_end);
+        List<Integer> listOfResults = Arrays.asList(x_if, x_function, x_while, x_foreach, x_else, x_end);
 
         return listOfResults.stream().anyMatch((i) -> (i > -1));
     }

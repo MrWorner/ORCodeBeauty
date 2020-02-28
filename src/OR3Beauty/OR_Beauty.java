@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 //http://www.java2s.com/Code/Java/Swing-JFC/CatalogSwing-JFC.htm
 //https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html#TextComponentDemo
-
-
 package OR3Beauty;
 
 import java.util.ArrayList;
@@ -19,12 +16,10 @@ import javax.swing.text.Element;
 
 //$Objects $OBJS $OBJ $Interface $USER $SELOBJ $SELOBJS $RETURN $ERRMSG $BASE $ILANG $XML $Xml $Date $Check $Math $Strings $Gener $NAME $SERVER true false java
 //shift + Alt + F
-
 /**
- * 
+ *
  * @author MaximGodyna
  */
-
 public class OR_Beauty {
 
     private int needToAddTab = 0;// сколько нужно добавить символов Tab
@@ -34,12 +29,12 @@ public class OR_Beauty {
     private boolean isCommentedLine_brakets = false;// является ли текущая строка комментарием в /*   */
     private boolean isCommentedLine_classic = false;// является ли текущая строка комментарием //
 
-
     /**
      * ГЛАВНЫЙ МЕТОД ПО СОЗДАНИЮ КРАСОТЫ КОДА
+     *
      * @param textPane
-     * @throws BadLocationException 
-     */    
+     * @throws BadLocationException
+     */
     public void CleanCode(JTextPane textPane) throws BadLocationException {
 
         needToAddTab = 0;// сколько нужно добавить символов Tab
@@ -47,7 +42,7 @@ public class OR_Beauty {
         currentEmptyLine = 0;// текущая пустая линия
         isCommentedLine_brakets = false;// является ли текущая строка комментарием в /*   */
         isCommentedLine_classic = false;// является ли текущая строка комментарием //
-             
+
         //--Вытаскиваем весь текст с компонента JTextPane
         Element root = textPane.getDocument().getDefaultRootElement();
         List<String> FinalListOfLines = new ArrayList<>();
@@ -71,12 +66,12 @@ public class OR_Beauty {
 
         String finalText = OR_TextMerger.MergeText(FinalListOfLines);// Слияние всех строк
         textPane.setText(finalText);// Прикрепляем к JTextPane
-        
+
         int charCount = textPane.getText().length();
         if (currentCaretPos > charCount) {
             currentCaretPos = charCount;
         }
-        
+
         textPane.setCaretPosition(currentCaretPos);
         if (needToAddTab > 0) {// Если вдруг неравное количество необх добавлений Таба, то значит где то нехватает #end, код в тексте сломан
             JOptionPane.showMessageDialog(null, "Ooops. Missing #end tag(s): " + needToAddTab);
@@ -85,8 +80,9 @@ public class OR_Beauty {
 
     /**
      * Удалить все символы ТАБ
+     *
      * @param text
-     * @return 
+     * @return
      */
     private String RemoveTabs(String text) {
         text = text.replaceAll("\t", "");// УДАЛЯЕМ ВСЕ СИМВОЛЫ TAB
@@ -95,8 +91,9 @@ public class OR_Beauty {
 
     /**
      * Удаляем все пробелы до первого слова
+     *
      * @param text
-     * @return 
+     * @return
      */
     private String RemoveSpaceBeforeAny(String text) {
 
@@ -116,8 +113,9 @@ public class OR_Beauty {
 
     /**
      * Добавляем символы ТАБ сколько необходимо
+     *
      * @param text
-     * @return 
+     * @return
      */
     private String AddRightTabs(String text) {
 
@@ -197,20 +195,22 @@ public class OR_Beauty {
         }
 
         int x_if = text.indexOf("#if");// получаем позицию команды #if
+        int x_function = text.indexOf("#function");// получаем позицию команды #function NEW 28.02.2020   
         int x_while = text.indexOf("#while");// получаем позицию команды #while        
         int x_foreach = text.indexOf("#foreach");// получаем позицию команды #foreach
         int x_end = text.indexOf("#end");//2 4.01.2020 NEW получаем позицию команды #end |  кто то помжет писать код в одну строку: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end
 
         boolean x_if_EXISTS = x_if > -1;
+        boolean x_function_EXISTS = x_function > -1;
         boolean x_while_EXISTS = x_while > -1;
         boolean x_foreach_EXISTS = x_foreach > -1;
         boolean x_end_EXISTS = x_end > -1;
 
-        if (x_if_EXISTS || x_while_EXISTS || x_foreach_EXISTS) // проверяем, есть ли одна из команд, которая открывает блок
+        if (x_if_EXISTS || x_function_EXISTS || x_while_EXISTS || x_foreach_EXISTS) // проверяем, есть ли одна из команд, которая открывает блок
         {
             boolean isOpening = true;
             if (x_end_EXISTS) {// Проверяем есть ли блок закрытия, если вдруг будет, то возможно придется игнорировать само открытие
-                if ((x_end > x_if && x_if_EXISTS) || (x_end > x_while && x_while_EXISTS) || (x_end > x_foreach && x_foreach_EXISTS)) {
+                if ((x_end > x_if && x_if_EXISTS) || (x_end > x_function && x_function_EXISTS) || (x_end > x_while && x_while_EXISTS) || (x_end > x_foreach && x_foreach_EXISTS)) {
                     isOpening = false;// код написан в одну строку с открытием и закрытием, пример: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end. Значит игнорируем строку
                 }
             }
@@ -248,8 +248,9 @@ public class OR_Beauty {
 
     /**
      * Открывающий блок
+     *
      * @param text
-     * @return 
+     * @return
      */
     private String OpeningBlock(String text) {
 
@@ -262,7 +263,7 @@ public class OR_Beauty {
                 text = "\t" + text;
             }
         }
-        
+
         //System.out.println("BEFORE OpeningBlock _text = " + text + " needToAddTab_comment = " + needToAddTab_comment);
         if (isCommentedLine_brakets) {
             needToAddTab_comment++;
@@ -276,9 +277,10 @@ public class OR_Beauty {
 
     /**
      * Закрывающий блок
+     *
      * @param text
      * @param isEndTag
-     * @return 
+     * @return
      */
     private String ClosingBlock(String text, boolean isEndTag) {
         if (!isCommentedLine_brakets) {
@@ -313,8 +315,9 @@ public class OR_Beauty {
 
     /**
      * Склеиваем обычный текст кода
+     *
      * @param text
-     * @return 
+     * @return
      */
     private String SimpleText(String text) {
 
@@ -332,8 +335,9 @@ public class OR_Beauty {
 
     /**
      * Удалить доп пустые строки
+     *
      * @param text
-     * @return 
+     * @return
      */
     private boolean RemoveExtraEmptyLines(String text) {
         boolean remove = false;
