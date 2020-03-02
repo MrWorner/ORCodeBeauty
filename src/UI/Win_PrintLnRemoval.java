@@ -207,7 +207,7 @@ public class Win_PrintLnRemoval extends javax.swing.JFrame {
                 OR_LineNumber.GetInstance().Refresh();
                 setVisible(false);
                 dispose();
-                JOptionPane.showMessageDialog(null, "Selected lines were removed!");
+                //JOptionPane.showMessageDialog(null, "Selected lines were removed!");
             } catch (BadLocationException ex) {
                 Logger.getLogger(Win_PrintLnRemoval.class.getName()).log(Level.SEVERE, null, ex);
             }

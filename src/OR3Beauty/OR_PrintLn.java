@@ -59,7 +59,7 @@ public class OR_PrintLn {
      *
      * @throws BadLocationException
      */
-    public void FindAllPrintLns() throws BadLocationException {
+    public void StartRemoving() throws BadLocationException {
 
         ResetResults();
 

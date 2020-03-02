@@ -168,7 +168,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         try {
             or3Beauty.CleanCode(jTextPane1);
             orLineNumber.Refresh();
-            //csgta.FindAllPrintLns();            
+            //csgta.StartRemoving();            
         } catch (BadLocationException ex) {
             Logger.getLogger(P1_CodeEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -176,7 +176,7 @@ public class P1_CodeEditor extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            orPrintLn.FindAllPrintLns();
+            orPrintLn.StartRemoving();
         } catch (BadLocationException ex) {
             Logger.getLogger(Win_MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -185,7 +185,6 @@ public class P1_CodeEditor extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             orPrintLnAdvanced.Start(jTextPane1);
-            new Win_AddPrintLn(jTextPane1).setVisible(true);
             or3Beauty.CleanCode(jTextPane1);
         } catch (BadLocationException ex) {
             Logger.getLogger(P1_CodeEditor.class.getName()).log(Level.SEVERE, null, ex);
