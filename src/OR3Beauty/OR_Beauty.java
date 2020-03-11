@@ -198,36 +198,47 @@ public class OR_Beauty {
         int x_function = text.indexOf("#function");// получаем позицию команды #function NEW 28.02.2020   
         int x_while = text.indexOf("#while");// получаем позицию команды #while        
         int x_foreach = text.indexOf("#foreach");// получаем позицию команды #foreach
+        int x_try = text.indexOf("#try");// получаем позицию команды #try
         int x_end = text.indexOf("#end");//2 4.01.2020 NEW получаем позицию команды #end |  кто то помжет писать код в одну строку: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end
 
         boolean x_if_EXISTS = x_if > -1;
         boolean x_function_EXISTS = x_function > -1;
         boolean x_while_EXISTS = x_while > -1;
         boolean x_foreach_EXISTS = x_foreach > -1;
+        boolean x_try_EXISTS = x_try > -1;
         boolean x_end_EXISTS = x_end > -1;
 
-        if (x_if_EXISTS || x_function_EXISTS || x_while_EXISTS || x_foreach_EXISTS) // проверяем, есть ли одна из команд, которая открывает блок
+        if (x_if_EXISTS || x_function_EXISTS || x_while_EXISTS || x_try_EXISTS || x_foreach_EXISTS) // проверяем, есть ли одна из команд, которая открывает блок
         {
-            boolean isOpening = true;
+            boolean isOneString = false;
+            
             if (x_end_EXISTS) {// Проверяем есть ли блок закрытия, если вдруг будет, то возможно придется игнорировать само открытие
-                if ((x_end > x_if && x_if_EXISTS) || (x_end > x_function && x_function_EXISTS) || (x_end > x_while && x_while_EXISTS) || (x_end > x_foreach && x_foreach_EXISTS)) {
-                    isOpening = false;// код написан в одну строку с открытием и закрытием, пример: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end. Значит игнорируем строку
+                if ((x_end > x_if && x_if_EXISTS) || (x_end > x_function && x_function_EXISTS) || (x_end > x_while && x_while_EXISTS) || (x_end > x_foreach && x_foreach_EXISTS) || (x_end > x_try && x_try_EXISTS)) {
+                    // код написан в одну строку с открытием и закрытием, пример: #if($isZayv && $isZayv == 1) #set($personZayv = $zapFace) #end. Значит игнорируем строку, чтобы не табнуть
+                    //needToAddTab--;//
+                    isOneString = true;
+                    text = SimpleText(text);
+
                 }
             }
-            if (isOpening) {
+
+            if (!isOneString) {
                 text = OpeningBlock(text);
             }
+
         } else {// если нет команды, которая открывает блок, то проверяем - не имеется ли команда закрытия блока (#end)
 
             //int x_end = _text.indexOf("#end");//ОТКЛЮЧЕН 24.01.2020 получаем позицию команды #end 
             int x_else = text.indexOf("#else");// получаем позицию команды #else
             int x_elseif = text.indexOf("#elseif");// получаем позицию команды #elseif
+            int x_catch = text.indexOf("#catch");// получаем позицию команды #catch
 
             //boolean x_end_ALIVE = x_end > -1;//ОТКЛЮЧЕН 24.01.2020
             boolean x_else_EXISTS = x_else > -1;
             boolean x_elseif_EXISTS = x_elseif > -1;
+            boolean x_catch_EXISTS = x_catch > -1;
 
-            if (x_end_EXISTS || x_else_EXISTS || x_elseif_EXISTS) {// если есть команда закрытие блока
+            if (x_end_EXISTS || x_else_EXISTS || x_elseif_EXISTS || x_catch_EXISTS) {// если есть команда закрытие блока
                 text = ClosingBlock(text, x_end_EXISTS);
             } else {// если нет команд открытия или закрытия блока, то просто для обычного текста
                 text = SimpleText(text);
