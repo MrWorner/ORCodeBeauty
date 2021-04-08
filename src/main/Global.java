@@ -5,7 +5,6 @@
  */
 package main;
 
-import UI.P99_Statistics;
 import UI.P2_Settings;
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -18,9 +17,6 @@ public class Global {
     public static JLabel backlabelNEW;
     public static INIfile CurrentINI = new INIfile();
 
-    public static P99_Statistics StatisticsPanel;
     public static P2_Settings SettingsPanel;
     public static ArrayList<String> ClientMessages = new ArrayList<String>();
-    public static DBConnect DBNewConnection;
-
 }
