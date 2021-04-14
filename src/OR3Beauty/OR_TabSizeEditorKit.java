@@ -7,7 +7,6 @@ import javax.swing.text.*;
  * @author MaximGodyna
  */
 
-
 public class OR_TabSizeEditorKit extends StyledEditorKit {
 
     public static final int TAB_SIZE = 40;

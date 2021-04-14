@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author MaximGodyna
  */
+
 public class OR_PrintLn {
 
     public static OR_PrintLn instance;

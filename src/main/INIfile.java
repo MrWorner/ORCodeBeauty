@@ -6,7 +6,7 @@ import java.io.*;
 /*
 * author:  Maxim Godyna TP026670
 * version: 1.00, 26.10.2014
-* description: Create INI file, save and read properties from the INI file
+* description: Current class creates INI file, saves and reads properties from the INI file
 * Available in offline session: YES
 * Available version: ALL
  */

@@ -13,6 +13,7 @@ import javax.swing.text.StyledDocument;
  *
  * @author MaximGodyna
  */
+
 public class OR_PrintLnAdvanced {
 
     private boolean commentLine = false;//данная строка является строкой комментарий

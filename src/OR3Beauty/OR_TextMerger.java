@@ -6,6 +6,7 @@ import java.util.List;
  * 
  * @author MaximGodyna
  */
+
 public class OR_TextMerger {
     public static String MergeText(List<String> listOfLines) {
         String finalText = "";

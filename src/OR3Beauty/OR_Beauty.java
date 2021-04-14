@@ -16,6 +16,7 @@ import javax.swing.text.Element;
  *
  * @author MaximGodyna
  */
+
 public class OR_Beauty {
 
     private int needToAddTab = 0;// сколько нужно добавить символов Tab

@@ -13,7 +13,6 @@ import javax.swing.text.StyleContext;
 
 //$Objects $OBJS $OBJ $Interface $USER $SELOBJ $SELOBJS $RETURN $ERRMSG $BASE $ILANG $XML $Xml $Date $Check $Math $Strings $Gener $NAME $SERVER true false java
 
-
 /**
  * 
  * @author MaximGodyna
