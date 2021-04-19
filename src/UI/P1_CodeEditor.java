@@ -33,7 +33,8 @@ public class P1_CodeEditor extends javax.swing.JPanel {
         orPrintLnAdvanced = new OR_PrintLnAdvanced();
         //jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \nAAAAAAAAAAAAAAAA \nBBBBBBBB \n$Systems.println(\"test 99\")");
 
-        jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \n#if($attrib)\nBBBBBBBB \n$Systems.println(\"test 99\")");
+        //jTextPane1.setText("Place your OR3 code here" + "\n$Systems.println(\"test 1\")" + "\n$Systems.println(\"test 2\") \n#if($attrib)\nBBBBBBBB \n$Systems.println(\"test 99\")");
+        jTextPane1.setText("");
 
         orLineNumber.Refresh();
     }
