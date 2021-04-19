@@ -9,4 +9,8 @@
 	Нумерация строк.
 	Смена скина программы.
 
+Требования: NetBeans 10.0, JDK 1.8
+
 ![alt text](https://realwar.ucoz.ru/2020/gitHub/OR3BEAUTY/CodeBeauty.png)
+
+![alt text](https://realwar.ucoz.ru/2020/gitHub/OR3BEAUTY/CodeBeauty_2.png)
