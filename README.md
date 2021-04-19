@@ -1,4 +1,7 @@
 # ORCodeBeauty
+
+![alt text](https://realwar.ucoz.ru/2020/gitHub/OR3BEAUTY/CodeBeauty.png)
+
 Возможности программы:	
 
 	Форматирование кода на языке ORlang: табуляция, удаление пустых строк.
@@ -11,6 +14,4 @@
 
 Требования: NetBeans 10.0, JDK 1.8
 
-![alt text](https://realwar.ucoz.ru/2020/gitHub/OR3BEAUTY/CodeBeauty.png)
-
-![alt text](https://realwar.ucoz.ru/2020/gitHub/OR3BEAUTY/CodeBeauty_2.png)
+![alt text](https://realwar.ucoz.ru/2020/gitHub/OR3BEAUTY/CodeBeauty_3.png)
