@@ -11,6 +11,10 @@ import javax.swing.JLabel;
 
 public class Global {
 
+    public static String version = "currentVersion=1";
+    public static String updateCheckURL = "https://realwar.ucoz.ru/2020/gitHub/OR3BEAUTY/CurrentVersion.txt";
+     
+    
     public static String Design = "src/Images/Backgrounds/2.jpg";
     public static String DesignName = "Orange lines";
 

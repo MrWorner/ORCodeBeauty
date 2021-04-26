@@ -12,12 +12,12 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import OR3Beauty.*;
 import main.Global;
+import updateChecker.UpdateChecker;
 
 /**
- * 
+ *
  * @author MaximGodyna
  */
-
 public class Win_MainMenu extends javax.swing.JFrame {
 
     // StudMarksTest StudMarksTest = new StudMarksTest();
@@ -101,6 +101,7 @@ public class Win_MainMenu extends javax.swing.JFrame {
         jPanel1.repaint();
         jPanel1.revalidate();
 
+        UpdateChecker.Start();
     }
 
     @SuppressWarnings("unchecked")
@@ -255,7 +256,7 @@ public class Win_MainMenu extends javax.swing.JFrame {
 
         // jPanel1.add(Global.StatisticsPanel = new P1_Statistics());
         jPanel1.add(P1_CodeEditor.getInstance());
-               
+
         jPanel1.repaint();
         jPanel1.revalidate();
 
